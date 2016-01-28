@@ -303,6 +303,7 @@ DEPENDENCIES
   letter_opener
   pg
   populator
+  pry
   public_activity
   rails (= 4.2.5)
   rails_12factor
