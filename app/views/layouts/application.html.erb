@@ -7,13 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= link_to("Home Page", root_path) %>
+  <%= link_to("Home Page", root_path) %> |
   <% if !!current_user %>
-    <%= link_to("Sign Out", destroy_user_session_path) %>
+    <%= link_to("Sign Out", destroy_user_session_path) %> | 
+    <%= link_to("Create a Post", new_post_path) %>
   <% else %>
   <%= link_to("Sign in", new_user_session_path) %>
-  <%= link_to("Create a Post", new_post_path) %>
-
   <% end %>
 
   <p class="notice"><%= notice %></p>
