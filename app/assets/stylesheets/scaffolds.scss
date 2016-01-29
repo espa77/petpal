@@ -1,10 +1,19 @@
 body {
-  background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+  // background: linear-gradient(to top, #ebfdf0, white 80%)
 }
+
+// html {
+//
+//   background-repeat: no-repeat;
+//   background: linear-gradient(to bottom, #ecfdf1, white 10%, #b3fdc9); /* Standard syntax */
+//   min-height: 100%;
+//   background-size: cover;
+//   color: #333;
+//   font-family: verdana, arial, helvetica, sans-serif;
+//   font-size: 13px;
+//   line-height: 18px;
+// }
+
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -13,7 +22,7 @@ p, ol, ul, td {
 }
 
 pre {
-  background-color: #eee;
+
   padding: 10px;
   font-size: 11px;
 }
@@ -53,7 +62,7 @@ div {
   padding: 7px;
   padding-bottom: 0;
   margin-bottom: 20px;
-  background-color: #f0f0f0;
+
 
   h2 {
     text-align: left;
@@ -62,7 +71,7 @@ div {
     font-size: 12px;
     margin: -7px;
     margin-bottom: 0px;
-    background-color: #c00;
+
     color: #fff;
   }
 
