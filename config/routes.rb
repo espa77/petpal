@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
   root to: 'home#front'
   get 'posts/:id/destroy', to: 'posts#destroy'
-  resources :posts 
-  devise_for :users 
+
+  as :user do
+    get 'login' => 'devise/sessions#new', :as => :new_user_session_path
+    post 'login' => 'devise/sessions#create', :as => :user_session_path
+    get 'users/sign_out', to: 'devise/sessions#destroy'
+  end
+
+  resources :comments
+  resources :posts
+  devise_for :users
 
   # devise_for :users, path: "", controllers: { sessions: "sessions", registrations: "registrations" }, path_names: { sign_in: 'login', password: 'forgot', confirmation: 'confirm', unlock: 'unblock', sign_up: 'register', sign_out: 'signout'}
 
