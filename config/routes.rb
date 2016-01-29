@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/index'
+
   root to: 'home#front'
   get 'posts/:id/destroy', to: 'posts#destroy'
 
@@ -8,9 +10,11 @@ Rails.application.routes.draw do
     get 'users/sign_out', to: 'devise/sessions#destroy'
   end
 
+  devise_for :users, :controllers => { registrations: 'registrations' }
+
   resources :comments
   resources :posts
-  devise_for :users
+  # devise_for :users
 
   # devise_for :users, path: "", controllers: { sessions: "sessions", registrations: "registrations" }, path_names: { sign_in: 'login', password: 'forgot', confirmation: 'confirm', unlock: 'unblock', sign_up: 'register', sign_out: 'signout'}
 
