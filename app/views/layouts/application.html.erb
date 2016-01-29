@@ -5,20 +5,15 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 </head>
 <body>
-  <%= link_to("Home Page", root_path) %> |
-  <% if !!current_user %>
-    <%= link_to("Sign Out", destroy_user_session_path) %> | 
-    <%= link_to("Create a Post", new_post_path) %>
-  <% else %>
-  <%= link_to("Sign in", new_user_session_path) %>
-  <% end %>
-
+  <div class="container">
+  <%= render 'shared/navbar' %>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-
-<%= yield %><br>
+  <%= yield %>
+</div>
 
 </body>
 </html>
