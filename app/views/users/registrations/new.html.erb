@@ -1,4 +1,4 @@
-<h2>Sign up page is this</h2>
+<h2>PetPal Sign Up Page</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -7,28 +7,34 @@
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
   </div>
-
+  <br>
   <div class="field">
-    <%= f.label :gender, 'Male', :value => 'Male' %><br />
-    <%= f.radio_button :gender, 'Male', autofocus: true %>
-    <%= f.label :gender, 'Female', :value => 'Female' %><br />
-    <%= f.radio_button :gender, 'Female', autofocus: true %>
+    <%= f.label :gender, 'Male', :value => 'Male' %>
+    <%= f.radio_button :gender, 'Male', autofocus: true %><br>
+    <%= f.label :gender, 'Female', :value => 'Female' %>
+    <%= f.radio_button :gender, 'Female', autofocus: true %><br>
   </div>
-
+  <br>
   <div class="field">
     <%= f.label :birthday %><br />
     <%= f.date_select :birthday, {order: [:month, :day, :year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year, end_year: Date.today.year - 100}, {required: true} %>
   </div>
+
+  <br>
 
   <div class="field">
     <%= f.label :species %><br />
     <%= f.text_field :species, autofocus: true %>
   </div>
 
+  <br>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
+
+  <br>
 
   <div class="field">
     <%= f.label :password %>
@@ -43,9 +49,9 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <br>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
-
-<%= render "users/shared/links" %>

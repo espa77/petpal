@@ -1,0 +1,16 @@
+
+<div class="col-md-4 ">
+  Name: <%= @user.name %> <br>
+  Species: <%= @user.species %> <br>
+  User: <%= @user.gender %> <br>
+  Birthday: <%= @user.birthday %> <br>
+</div>
+
+
+<% @user.friends.each do |friend| %>
+  <div class="container">
+
+    <%= friend.name %> <%= link_to 'Check your friend page!', "users/#{friend.id}/profile_page" %>
+
+  </div>
+<% end %>

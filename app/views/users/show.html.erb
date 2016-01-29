@@ -1,0 +1,17 @@
+
+<%if @user == current_user %>
+  <h1><%= @user.name %>'s Profile Page</h1>
+
+    <% @user.friends.each do |friend| %>
+      <div class="container">
+
+      <%= friend.name %> <%= link_to "Check your friend's page!", "/users/#{friend.id}/profile_page" %>
+
+
+      </div>
+    <% end %>
+
+<% else %>
+  <%= render '/users/profile/profile_page' %>
+
+<% end %>
