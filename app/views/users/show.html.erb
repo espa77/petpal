@@ -1,12 +1,12 @@
-
 <%if @user == current_user %>
   <h1><%= @user.name %>'s Profile Page</h1>
+
 
   <p>
 
     <strong>Profile Picture:</strong>
-  
-    <img width="250" height="250" src="<%= @user.profilePic %>">
+
+   <%= image_tag @user.profilePic.url || 'pet-default.jpg', class: 'profilePic' %>
 
   </p>
 <!-- upload profile pic -->
