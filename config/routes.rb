@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     post 'login' => 'devise/sessions#create', :as => :user_session_path
     get 'users/sign_out', to: 'devise/sessions#destroy'
     get 'users/index', to: 'users#index'
-    get 'users/:id/profile_page', to: 'users#show', :as => :profile_page_path
+    get 'users/:id/profile_page', to: 'users#show', :as => :profile_page
   end
 
   devise_for :users, :controllers => { registrations: 'registrations' }

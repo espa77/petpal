@@ -1,28 +1,16 @@
 <%if @user == current_user %>
   <h1><%= @user.name %>'s Profile Page</h1>
 
-
   <p>
-
     <strong>Profile Picture:</strong>
-
-   <%= image_tag @user.profilePic.url || 'pet-default.jpg', class: 'profilePic' %>
-
+   <%= image_tag @user.avatar.url || 'pet-default.jpg', class: 'avatar' %>
   </p>
-<!-- upload profile pic -->
-<div class="profile-picture-upload">
 
-  <%= form_tag({action: :upload}, multipart: true) do %>
-  <%= file_field_tag 'profilePic' %> <%= submit_tag 'Save Profile Pic' %>
-  <% end %>
-
-</div>
 <!-- friends list -->
     <% @user.friends.each do |friend| %>
       <div class="container">
 
       <%= friend.name %> <%= link_to "Check your friend's page!", "/users/#{friend.id}/profile_page" %>
-
 
       </div>
     <% end %>

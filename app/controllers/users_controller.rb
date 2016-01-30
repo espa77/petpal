@@ -22,13 +22,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def upload
-    # binding.pry
-    @user=set_user
-    @user.profilePic=params[:profilePic]
-    redirect_to "users/#{@user.id}/profile_page"
-  end
-
   private
 
   def set_user
@@ -36,6 +29,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:profilePic)
+    params.require(:user).permit(:name, :gender, :birthday, :species, :email, :password, :password_confirmation, :avatar)
   end
 end
