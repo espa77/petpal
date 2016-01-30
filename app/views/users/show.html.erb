@@ -2,6 +2,22 @@
 <%if @user == current_user %>
   <h1><%= @user.name %>'s Profile Page</h1>
 
+  <p>
+
+    <strong>Profile Picture:</strong>
+  
+    <img width="250" height="250" src="<%= @user.profilePic %>">
+
+  </p>
+<!-- upload profile pic -->
+<div class="profile-picture-upload">
+
+  <%= form_tag({action: :upload}, multipart: true) do %>
+  <%= file_field_tag 'profilePic' %> <%= submit_tag 'Save Profile Pic' %>
+  <% end %>
+
+</div>
+<!-- friends list -->
     <% @user.friends.each do |friend| %>
       <div class="container">
 

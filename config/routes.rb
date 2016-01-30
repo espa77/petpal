@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'home#front'
   get 'posts/:id/destroy', to: 'posts#destroy'
+  post 'users/:id/profile_page', to: 'users#upload'
 
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session_path
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
-  resources :comments
+  resources :comments, only: [:create, :destroy]
   resources :posts
   resources :friendships
   # devise_for :users
