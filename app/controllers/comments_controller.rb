@@ -1,10 +1,9 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_commentable, only: :create
-  # respond_to :js
+  respond_to :js
 
   def create
-    # binding.pry
     @comment = @commentable.comments.new do |message|
       message.comment = params[:comment_text]
       message.user = current_user
