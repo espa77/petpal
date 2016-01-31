@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :like]
   # GET /posts
   # GET /posts.json
   def index
@@ -53,6 +53,15 @@ class PostsController < ApplicationController
       end
     end
   end
+
+  def like  
+      if @post.liked_by current_user
+        respond_to do |format|
+          format.html { redirect_to :back }
+          format.js
+        end
+      end 
+  end 
 
   # DELETE /posts/1
   # DELETE /posts/1.json

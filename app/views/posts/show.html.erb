@@ -15,6 +15,12 @@
   <%= @post.content %>
 </p>
 
+<%= link_to("Like This!", like_post_path) %><br>
+<% if @post.get_likes.size > 0 %>
+  <%= "#{@post.get_likes.size} people like this" %>
+<% end %>
+
+
 <h4>Comments</h4>
 <hr>
 <%= render 'comments/form', commentable: @post %>

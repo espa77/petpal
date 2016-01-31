@@ -6,6 +6,12 @@
     <div class="row">
       <span class="text"><%= comment.comment %></span>
 
+
+     <%= link_to("Like This!", like_comment_path) %><br>
+      <% if comment.get_likes.size > 0 %>
+        <%= "#{comment.get_likes.size} people like this" %>
+      <% end %>
+
     </div>
     <div class="pull-left">
       <% if belongs_to_user?(comment) %>

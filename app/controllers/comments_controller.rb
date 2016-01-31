@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_commentable, only: :create
+  before_action :find_commentable, only: [:create, :like]
   respond_to :js
 
   def create
@@ -14,6 +14,15 @@ class CommentsController < ApplicationController
       format.js { }
     end
   end
+
+  def like  
+    if @post.liked_by current_user
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js
+      end
+    end 
+  end 
 
   def destroy
     @comment = current_user.comments.find(params[:id])
