@@ -17,7 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 # resizing image to fit a certain scale
-gem 'rmagick'
+gem 'rmagick', require: false
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
