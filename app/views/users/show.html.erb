@@ -3,10 +3,21 @@
 
   <p>
     <strong>Profile Picture:</strong>
-   <%= image_tag @user.avatar.url || 'pet-default.jpg', class: 'avatar' %>
+
+   <%= image_tag @user.avatar.url(:medium) || 'pet-default.jpg', class: 'avatar' %>
+
   </p>
 
+  <div class="col-md-4 ">
+    <h3>My Birography</h3>
+    Name: <%= @user.name %> <br>
+    Species: <%= @user.species %> <br>
+    User: <%= @user.gender %> <br>
+    Birthday: <%= @user.birthday %> <br>
+
+
 <!-- friends list -->
+<h3>My Friends</h3>
     <% @user.friends.each do |friend| %>
       <div class="container">
 
@@ -14,6 +25,7 @@
 
       </div>
     <% end %>
+  </div>
 
 <% else %>
   <%= render '/users/profile/profile_page' %>

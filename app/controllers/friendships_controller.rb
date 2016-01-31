@@ -1,5 +1,9 @@
 class FriendshipsController < ApplicationController
 
+  def index
+    @friendships = User.all
+  end
+
   def create
     @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
     if @friendship.save
@@ -9,6 +13,10 @@ class FriendshipsController < ApplicationController
       flash[:notice] = "Unable to add friend."
       redirect_to users_index_path
     end
+  end
+
+  def show
+
   end
 
   def destroy
