@@ -1,25 +1,23 @@
-<div id="comment-<%= comment.id %>">
+<div id="comment-<%= comment.id %>"> 
   <div class="info">
     <h4 class="email"><%= comment.user.email %></h4>
   </div>
   <div class="content">
     <div class="row">
-      <span class="text"><%= comment.comment %></span>
-
-
-     <%= link_to("Like This!", like_comment_path) %><br>
-      <% if comment.get_likes.size > 0 %>
+      <span class="text"><%= comment.comment %></span><br>
+       <%= link_to("Like This!", like_comment_path(:commentable_type => comment.commentable_type, :post_id => comment.commentable_id, :id => comment.id)) %><br>
+       <% if comment.get_likes.size == 1 %>
+        <%= "#{comment.get_likes.size} person likes this" %>
+      <% elsif comment.get_likes.size > 1 %>
         <%= "#{comment.get_likes.size} people like this" %>
       <% end %>
-
-    </div>
     <div class="pull-left">
       <% if belongs_to_user?(comment) %>
         <%= link_to comment_path(comment), method: :delete, class: 'btn btn-danger btn-sm', remote: true do %>
           <% fa_icon 'trash' %>
         <% end %>
       <% end %>
-    </div>
+    </div> 
   </div>
   <br>
   <hr>
