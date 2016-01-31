@@ -14,8 +14,16 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
-  resources :comments, only: [:create, :destroy]
-  resources :posts
+  resources :comments, only: [:create, :destroy] do
+    member do
+      get 'like'
+    end
+  end
+  resources :posts do
+    member do
+      get 'like'
+    end
+  end
   resources :friendships
   # devise_for :users
 

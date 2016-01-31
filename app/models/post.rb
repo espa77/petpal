@@ -4,4 +4,4 @@ class Post < ActiveRecord::Base
   mount_uploader :attachment, AvatarUploader
   acts_as_commentable
   acts_as_votable
-end
+end 
