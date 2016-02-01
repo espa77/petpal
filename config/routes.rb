@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
 
+  get 'omniauth_callbacks/facebook'
+
+  get 'omniauth_callbacks/failure'
 
   root to: 'home#front'
   get 'posts/:id/destroy', to: 'posts#destroy'
   # post 'users/:id/profile_page', to: 'users#upload'
+
   get 'friendships/:id/destroy', to: 'friendships#destroy', :as => :unfriend
   #creating this route was necessary for getting the correct commentable id
   #along with the id of the comment. There is likely a better way.
   get 'posts/:post_id/comment/:id/like', to: 'comments#like', :as => :like_comment
+
 
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session_path
@@ -17,7 +22,7 @@ Rails.application.routes.draw do
     get 'users/:id/profile_page', to: 'users#show', :as => :profile_page
   end
 
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "users/omniauth_callbacks" }
 
   resources :posts do
     member do
@@ -28,9 +33,6 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:create, :destroy]
   resources :favorites
-
-  resources :comments, only: [:create, :destroy]
-
   resources :friendships, except: [:destroy]
   # devise_for :users
 
