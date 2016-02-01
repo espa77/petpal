@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'omniauth_callbacks/facebook'
-
-  get 'omniauth_callbacks/failure'
-
   root to: 'home#front'
   get 'posts/:id/destroy', to: 'posts#destroy'
   # post 'users/:id/profile_page', to: 'users#upload'
@@ -35,6 +31,7 @@ Rails.application.routes.draw do
   resources :favorites do
     member do
       get 'like'
+      get 'unlike'
     end
   end
 

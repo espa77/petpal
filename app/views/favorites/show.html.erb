@@ -13,10 +13,11 @@
 
 <%= link_to("Like This!", like_favorite_path) %><br>
 <% if @favorite.get_likes.size == 1 %>
-  <%= "#{@favorite.get_likes.size} person like this" %><br>
+  <%= "#{@favorite.get_likes.size} person likes this" %><br>
 <% else @favorite.get_likes.size > 1 %>
   <%= "#{@favorite.get_likes.size} people like this" %><br>
 <% end %>
+<%= link_to("Disike This!", unlike_favorite_path) %><br>
 
 <% if current_user.id == @favorite.user_id %>
 <%= link_to 'Edit', edit_favorite_path(@favorite) %> |
