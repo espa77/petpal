@@ -25,7 +25,7 @@ class FavoritesController < ApplicationController
   # POST /favorites.json
   def create
     @favorite = Favorite.new(favorite_params)
-
+    @favorite.user_id=current_user
     respond_to do |format|
       if @favorite.save
         format.html { redirect_to @favorite, notice: 'Favorite was successfully created.' }
@@ -59,6 +59,15 @@ class FavoritesController < ApplicationController
       format.html { redirect_to favorites_url, notice: 'Favorite was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def like
+      if @favorite.liked_by current_user
+        respond_to do |format|
+          format.html { redirect_to :back }
+          format.js
+        end
+      end
   end
 
   private
