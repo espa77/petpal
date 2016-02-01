@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <img width="250" height="150" src="<%= @favorite.attachment %>">
+<p class="favorite_community_photo">
+  <td><%= image_tag @favorite.attachment.url || 'pet_community_photo.jpg', class: 'attachment', width: '350' %></td>
 </p>
 
 <h1><%= @favorite.title %></h1>
@@ -13,12 +13,13 @@
 
 <%= link_to("Like This!", like_favorite_path) %><br>
 <% if @favorite.get_likes.size == 1 %>
-  <%= "#{@favorite.get_likes.size} person like this" %>
+  <%= "#{@favorite.get_likes.size} person like this" %><br>
 <% else @favorite.get_likes.size > 1 %>
-  <%= "#{@favorite.get_likes.size} people like this" %>
+  <%= "#{@favorite.get_likes.size} people like this" %><br>
 <% end %>
 
-<% if current_user == @favorite.user_id %>
+<% if current_user.id == @favorite.user_id %>
 <%= link_to 'Edit', edit_favorite_path(@favorite) %> |
+<%= link_to 'Destroy', @favorite, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <% end %>
 <%= link_to 'Back', favorites_path %>
