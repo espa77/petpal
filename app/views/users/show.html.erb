@@ -1,15 +1,17 @@
 <%if @user == current_user %>
   <h1><%= @user.name %>'s Profile Page</h1>
 
-  <p>
-    <strong>Profile Picture:</strong>
 
-   <%= image_tag @user.avatar.url(:medium) || 'pet-default.jpg', class: 'avatar' %>
+<div class="container">
+  <%= render "users/shared/profile_picture" %><br>
+  <strong>Profile Picture</strong>
 
-  </p>
+</div>
+
+
 
   <div class="col-md-4 ">
-    <h3>My Birography</h3>
+    <h3>My Biography</h3>
     Name: <%= @user.name %> <br>
     Species: <%= @user.species %> <br>
     User: <%= @user.gender %> <br>
