@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160201001840) do
-=======
 ActiveRecord::Schema.define(version: 20160201155759) do
->>>>>>> 824592b3133882299371ef6a20eeceba0b4bb695
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,10 +112,7 @@ ActiveRecord::Schema.define(version: 20160201155759) do
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
-<<<<<<< HEAD
-  add_foreign_key "identities", "users"
-=======
   add_foreign_key "favorites", "users"
->>>>>>> 824592b3133882299371ef6a20eeceba0b4bb695
+  add_foreign_key "identities", "users"
   add_foreign_key "posts", "users"
 end

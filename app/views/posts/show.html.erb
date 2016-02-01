@@ -6,7 +6,7 @@
 </p>
 
 <p>
-  <strong>User:</strong> 
+  <strong>User:</strong>
   <%= @post.user %>
 </p>
 
@@ -21,6 +21,9 @@
 <% else @post.get_likes.size > 1 %>
   <%= "#{@post.get_likes.size} people like this" %>
 <% end %>
+
+
+  <%= link_to("Disike This!", unlike_post_path) %><br>
 
 
 <h4>Comments</h4>

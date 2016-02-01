@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   #creating this route was necessary for getting the correct commentable id
   #along with the id of the comment. There is likely a better way.
   get 'posts/:post_id/comment/:id/like', to: 'comments#like', :as => :like_comment
+  get 'posts/:post_id/comment/:id/unlike', to: 'comments#unlike', :as => :unlike_comment
 
 
   as :user do
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
   resources :posts do
     member do
       get 'like'
+      get 'unlike'
     end
   end
 
