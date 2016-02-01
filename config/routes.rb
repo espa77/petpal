@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   get 'posts/:id/destroy', to: 'posts#destroy'
   # post 'users/:id/profile_page', to: 'users#upload'
 
+  get 'friendships/:id/destroy', to: 'friendships#destroy', :as => :unfriend
+  #creating this route was necessary for getting the correct commentable id
+  #along with the id of the comment. There is likely a better way.
+  get 'posts/:post_id/comment/:id/like', to: 'comments#like', :as => :like_comment
+
+
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session_path
     post 'login' => 'devise/sessions#create', :as => :user_session_path
@@ -18,17 +24,15 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "users/omniauth_callbacks" }
 
-  resources :comments, only: [:create, :destroy] do
-    member do
-      get 'like'
-    end
-  end
   resources :posts do
     member do
       get 'like'
     end
   end
-  resources :friendships
+
+  resources :comments, only: [:create, :destroy]
+
+  resources :friendships, except: [:destroy]
   # devise_for :users
 
   # devise_for :users, path: "", controllers: { sessions: "sessions", registrations: "registrations" }, path_names: { sign_in: 'login', password: 'forgot', confirmation: 'confirm', unlock: 'unblock', sign_up: 'register', sign_out: 'signout'}
