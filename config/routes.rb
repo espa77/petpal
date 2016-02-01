@@ -30,6 +30,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :favorites do
+    member do
+      get 'like'
+    end
+  end
+
 
   resources :comments, only: [:create, :destroy]
   resources :favorites
