@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :posts
   has_many :comments
+  has_many :requests
   #creates friendship relationship
   has_many :friendships
   has_many :friends, :through => :friendships

@@ -1,8 +1,8 @@
 <% @users.each do |user|%>
   Name: <%= user.name %><br>
-  <%= form_for :friendship, url: add_friend_path do |f| %>
+  <%= form_for :friendship, url: requests_path do |f| %>
     <%= f.hidden_field :friend_id, :value => user.id %>
     <%= f.hidden_field :user_id, :value => current_user.id %>
     <%= f.submit "Add Friend" %> <br>
   <% end %>
-<% end %>
+<% end %> 

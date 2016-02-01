@@ -10,6 +10,9 @@ class FriendshipsController < ApplicationController
     else
       @friendship = current_user.friendships.build(:friend_id => params[:friendship][:friend_id])
       if @friendship.save
+        #binding.pry
+        @request = Request.find(params[:friendship][:request_id])
+        @request.destroy
         flash[:notice] = "Added friend."
         redirect_to profile_page_path(current_user)
       end
