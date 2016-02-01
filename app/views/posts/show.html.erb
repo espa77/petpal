@@ -17,13 +17,11 @@
 
 <%= link_to("Like This!", like_post_path) %><br>
 <% if @post.get_likes.size == 1 %>
-  <%= "#{@post.get_likes.size} person like this" %>
+  <%= "#{@post.get_likes.size} person likes this" %>
 <% else @post.get_likes.size > 1 %>
   <%= "#{@post.get_likes.size} people like this" %>
 <% end %>
-
-
-  <%= link_to("Disike This!", unlike_post_path) %><br>
+<br><%= link_to("Disike This!", unlike_post_path) %><br>
 
 
 <h4>Comments</h4>
