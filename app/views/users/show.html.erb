@@ -20,18 +20,20 @@
 
 <!-- friends list -->
 <h3>My Friends</h3>
-  
+
       <div class="container">
     <% @user.friendships.each do |friendship| %>
       <% @friend_num = friendship.friend_id %>
         <% @friend = User.find(@friend_num) %>
-          <%= @friend.name %> <%= link_to "Check your friend's page!", "/users/#{@friend_num}/profile_page" %>  | <%= link_to 'Unfriend', unfriend_path(:friendship_id => friendship.id) %> 
+          <%= @friend.name %> <%= link_to "Check your friend's page!", "/users/#{@friend_num}/profile_page" %>  | <%= link_to 'Unfriend', unfriend_path(:friendship_id => friendship.id) %>
 <% end %>
-      
+
 
       </div>
-    
+
   </div>
+
+  <li><%= link_to('Edit Profile', edit_user_registration_path) %></li>
 
 <% else %>
   <%= render '/users/profile/profile_page' %>
