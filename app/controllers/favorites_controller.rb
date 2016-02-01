@@ -1,5 +1,6 @@
 class FavoritesController < ApplicationController
-  before_action :set_favorite, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_favorite, only: [:show, :edit, :update, :destroy, :like]
 
   # GET /favorites
   # GET /favorites.json
@@ -10,6 +11,8 @@ class FavoritesController < ApplicationController
   # GET /favorites/1
   # GET /favorites/1.json
   def show
+    @favorites = set_favorite
+    @comments = @favorite.comments
   end
 
   # GET /favorites/new
@@ -25,7 +28,7 @@ class FavoritesController < ApplicationController
   # POST /favorites.json
   def create
     @favorite = Favorite.new(favorite_params)
-    @favorite.user_id=current_user
+    @favorite.user_id = current_user
     respond_to do |format|
       if @favorite.save
         format.html { redirect_to @favorite, notice: 'Favorite was successfully created.' }
@@ -62,12 +65,12 @@ class FavoritesController < ApplicationController
   end
 
   def like
-      if @favorite.liked_by current_user
-        respond_to do |format|
-          format.html { redirect_to :back }
-          format.js
-        end
+    if @favorite.liked_by current_user
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js
       end
+    end
   end
 
   private
@@ -78,6 +81,6 @@ class FavoritesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def favorite_params
-      params[:favorite]
+      params.require(:favorite).permit(:title, :description, :user_id)
     end
 end

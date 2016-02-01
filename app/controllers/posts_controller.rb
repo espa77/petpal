@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all 
+    @posts = Post.all
   end
 
   # GET /posts/1
@@ -54,14 +54,14 @@ class PostsController < ApplicationController
     end
   end
 
-  def like  
-      if @post.liked_by current_user
-        respond_to do |format|
-          format.html { redirect_to :back }
-          format.js
-        end
-      end 
-  end 
+  def like
+    if @post.liked_by current_user
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js
+      end
+    end
+  end
 
   # DELETE /posts/1
   # DELETE /posts/1.json

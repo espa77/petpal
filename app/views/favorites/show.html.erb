@@ -11,7 +11,7 @@
 </p>
 
 
-<%= link_to("Like This!", like_post_path) %><br>
+<%= link_to("Like This!", like_favorite_path) %><br>
 <% if @favorite.get_likes.size == 1 %>
   <%= "#{@favorite.get_likes.size} person like this" %>
 <% else @favorite.get_likes.size > 1 %>

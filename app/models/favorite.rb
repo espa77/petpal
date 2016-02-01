@@ -3,4 +3,5 @@ class Favorite < ActiveRecord::Base
   has_many :users
   has_attached_file :page_avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/pet-community-photo.jpg"
   acts_as_votable
+  acts_as_commentable
 end
