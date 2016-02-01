@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'omniauth_callbacks/facebook'
+
+  get 'omniauth_callbacks/failure'
+
   root to: 'home#front'
   get 'posts/:id/destroy', to: 'posts#destroy'
-  post 'users/:id/profile_page', to: 'users#upload'
+  # post 'users/:id/profile_page', to: 'users#upload'
 
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session_path
@@ -12,7 +16,7 @@ Rails.application.routes.draw do
     get 'users/:id/profile_page', to: 'users#show', :as => :profile_page
   end
 
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "users/omniauth_callbacks" }
 
   resources :comments, only: [:create, :destroy] do
     member do

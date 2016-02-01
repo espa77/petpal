@@ -69,6 +69,7 @@ end
 gem 'devise'
 gem 'carrierwave'
 gem 'friendly_id'
+gem 'omniauth-facebook'
 
 gem 'will_paginate'
 gem 'public_activity'
