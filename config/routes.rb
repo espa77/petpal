@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # post 'users/:id/profile_page', to: 'users#upload'
 
   get 'friendships/:id/destroy', to: 'friendships#destroy', :as => :unfriend
+  post 'add_friend', to: 'friendships#create', :as => :add_friend
   #creating this route was necessary for getting the correct commentable id
   #along with the id of the comment. There is likely a better way.
   get 'posts/:post_id/comment/:id/like', to: 'comments#like', :as => :like_comment

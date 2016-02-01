@@ -1,22 +1,22 @@
 class FriendshipsController < ApplicationController
 
-  def index
-    @friendships = User.all
-  end
-
   def create
-    @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
-    if @friendship.save
-      flash[:notice] = "Added friend."
-      redirect_to root_url
+    if current_user.id == params[:friendship][:friend_id].to_i
+      flash[:notice] = 'Cannot add yourself.'
+      redirect_to profile_page_path(current_user)
+    elsif current_user.friends != [] && current_user.friends.include?(User.find(params[:friendship][:friend_id]))
+        flash[:notice] = "Unable to add friend."
+        redirect_to users_index_path
     else
-      flash[:notice] = "Unable to add friend."
-      redirect_to users_index_path
+      @friendship = current_user.friendships.build(:friend_id => params[:friendship][:friend_id])
+      if @friendship.save
+        flash[:notice] = "Added friend."
+        redirect_to profile_page_path(current_user)
+      end
     end
   end
 
   def show
-
   end
 
   def destroy
