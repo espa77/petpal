@@ -18,7 +18,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 # resizing image to fit a certain scale
 gem 'rmagick', require: false
-
+#amazon persist photos onto heroku
+gem 'fog'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
