@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_commentable, only: [:create, :like]
-  respond_to :js 
+  before_action :find_commentable, only: [:create, :like, :unlike]
+  respond_to :js
 
   def create
     @comment = @commentable.comments.new do |message|
@@ -15,15 +15,31 @@ class CommentsController < ApplicationController
     end
   end
 
-  def like 
+  def like
     @comment = @commentable.comments.find(params[:id])
     if @comment.liked_by current_user
       respond_to do |format|
         format.html { redirect_to :back }
         format.js
       end
-    end 
-  end 
+    end
+  end
+
+  # def like
+  #   @post = Post.find(params[:id])
+  #   @post.liked_by current_user
+  #   redirect_to @post
+  # end
+
+  def unlike
+    @comment = @commentable.comments.find(params[:id])
+    if @comment.downvote_by current_user
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js
+      end
+    end
+  end
 
   def destroy
     @comment = current_user.comments.find(params[:id])
@@ -37,12 +53,11 @@ class CommentsController < ApplicationController
   private
 
   def find_commentable
-    #binding.pry
     @commentable_type = params[:commentable_type].classify
       if params[:commentable_id] != nil || params.include?(:post_id) == false
         @commentable = @commentable_type.constantize.find(params[:commentable_id])
       else
-        @commentable = @commentable_type.constantize.find(params[:post_id])  
+        @commentable = @commentable_type.constantize.find(params[:post_id])
       end
     end
 end

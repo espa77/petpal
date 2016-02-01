@@ -23,6 +23,9 @@
 <% end %>
 
 
+  <%= link_to("Disike This!", unlike_post_path) %><br>
+
+
 <h4>Comments</h4>
 <hr>
 <%= render 'comments/form', commentable: @post %>
