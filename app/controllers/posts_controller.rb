@@ -55,14 +55,13 @@ class PostsController < ApplicationController
   end
 
   def like
-<<<<<<< HEAD
     if @post.liked_by current_user
       respond_to do |format|
         format.html { redirect_to :back }
         format.js
       end
     end
-=======
+
     @post = Post.find(params[:id])
     @post.liked_by current_user
     redirect_to @post
@@ -72,7 +71,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.downvote_by current_user
     redirect_to @post
->>>>>>> unlike-posts
+
   end
 
   # DELETE /posts/1
