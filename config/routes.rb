@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
+
   root to: 'home#front'
   get 'posts/:id/destroy', to: 'posts#destroy'
   post 'users/:id/profile_page', to: 'users#upload'
   #creating this route was necessary for getting the correct commentable id
-  #along with the id of the comment. There is likely a better way. 
+  #along with the id of the comment. There is likely a better way.
   get 'posts/:post_id/comment/:id/like', to: 'comments#like', :as => :like_comment
 
   as :user do
@@ -23,8 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :comments, only: [:create, :destroy] 
-
+  resources :comments, only: [:create, :destroy]
+  resources :favorites
   resources :friendships
   # devise_for :users
 
