@@ -28,9 +28,10 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    binding.pry
+    # binding.pry
     respond_to do |format|
       if @post.save
+          # @post.attachments(@post.user_id,params[:attachment]) if params[:attachment]
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -45,6 +46,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+          # @post.attachments(@post.user_id,params[:attachment]) if params[:attachment]
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else

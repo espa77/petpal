@@ -16,22 +16,44 @@
     Species: <%= @user.species %> <br>
     User: <%= @user.gender %> <br>
     Birthday: <%= @user.birthday %> <br>
+  </div>
 
 
-<!-- friends list -->
-<h2>Friend Requests</h2>
-<% Request.all.each do |request| %>
+
+
+  <table>
+  <th>My Photos</th>
+    <%@user.display_photos.in_groups_of(3) do |photos| %>
+    <tr>
+      <% photos.each do |photo| %>
+      <% if photo %>
+      <td> <%= image_tag photo.attachment.url(:thumb) %></td>
+      <% end %>
+      <% end %>
+    </tr>
+    <% end  %>
+  </table>
+
+<div class="container">
+
+  <h2>Friend Requests</h2>
+
+  <% Request.all.each do |request| %>
   <% if request.friend_id == current_user.id %>
   <!--add in logic to not show requests after accepted -->
   <%= "#{User.find(request.user_id).name} would like to be your friend" %>
-    <%= form_for :friendship, url: add_friend_path do |f| %>
-      <%= f.hidden_field :friend_id, :value => request.user_id %>
-      <%= f.hidden_field :user_id, :value => request.friend_id %>
-      <%= f.hidden_field :request_id, :value => request.id %>
-      <%= f.submit "Accept" %> <br>
-   <% end %>
-  <% end %> 
-<% end %> 
+  <%= form_for :friendship, url: add_friend_path do |f| %>
+  <%= f.hidden_field :friend_id, :value => request.user_id %>
+  <%= f.hidden_field :user_id, :value => request.friend_id %>
+  <%= f.hidden_field :request_id, :value => request.id %>
+  <%= f.submit "Accept" %> <br>
+  <% end %>
+  <% end %>
+  <% end %>
+
+</div>
+  <!-- friends list -->
+
 
 <h3>My Friends</h3>
 
@@ -39,20 +61,14 @@
     <% @user.friendships.each do |friendship| %>
       <% @friend_num = friendship.friend_id %>
         <% @friend = User.find(@friend_num) %>
-          <%= @friend.name %> <%= link_to "Check your friend's page!", "/users/#{@friend_num}/profile_page" %>  | <%= link_to 'Unfriend', unfriend_path(:friendship_id => friendship.id) %>
+          <%= @friend.name %> <%= link_to "Check your friend's page!", "/users/#{@friend_num}/profile_page" %>  | <%= link_to 'Unfriend', unfriend_path(:friendship_id => friendship.id) %><br>
     <% end %>
     <% @user.inverse_friendships.each do |friendship| %>
       <% @friend_num = friendship.user_id %>
       <% @friend = User.find(@friend_num) %>
-       <%= @friend.name %> <%= link_to "Check your friend's page!", "/users/#{@friend_num}/profile_page" %>  | <%= link_to 'Unfriend', unfriend_path(:friendship_id => friendship.id) %>
+       <%= @friend.name %> <%= link_to "Check your friend's page!", "/users/#{@friend_num}/profile_page" %>  | <%= link_to 'Unfriend', unfriend_path(:friendship_id => friendship.id) %><br>
     <% end %>
 
-
-
-
-      </div>
-
-  </div>
 
   <li><%= link_to('Edit Profile', edit_user_registration_path) %></li>
 
