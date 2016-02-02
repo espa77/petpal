@@ -27,7 +27,7 @@
     <tr>
       <% photos.each do |photo| %>
       <% if photo %>
-      <td> <%=image_tag photo.attachment.url %> </td>
+      <td> <%= image_tag photo.attachment.url(:thumb) %></td>
       <% end %>
       <% end %>
     </tr>

@@ -28,7 +28,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    binding.pry
+    # binding.pry
     respond_to do |format|
       if @post.save
           # @post.attachments(@post.user_id,params[:attachment]) if params[:attachment]

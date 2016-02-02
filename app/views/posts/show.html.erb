@@ -2,7 +2,7 @@
 
 <p>
   <strong>Attachment:</strong>
-  <img width="250" height="150" src="<%= @post.attachment %>">
+  <%= image_tag @post.attachment.url(:small) %>
 </p>
 
 <p>
