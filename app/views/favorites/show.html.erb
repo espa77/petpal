@@ -22,9 +22,29 @@
   <%= render '/posts/form'  %>
 <% end %>
 
+<h4><strong>Community Feed</strong></h4>
 <% Post.all.each do |post| %>
   <% if post.favorite_id == @favorite.id %>
-    <%= post %>
+    <% if post.attachment == nil %>
+      <%= post.content %>
+    <% else %>
+    <p>
+      <%= post.attachment %> 
+      <h4><%= post.content %></h4>
+    </p>
+      <% if post.user_id == current_user.id %>
+        <%= link_to 'Edit Post', edit_post_path(post) %> | <%= link_to 'Delete Post', destroy_post_path(post) %><br>
+      <% end %>
+      <h4>Comments</h4>
+        <hr>
+          <%= render 'comments/form', commentable: post %>
+        <br>
+        <div class="comments">
+          <ul>
+            <%= render post.comments %>
+          </ul>
+        </div>
+    <% end %>
   <% end %>
 <% end %>
 

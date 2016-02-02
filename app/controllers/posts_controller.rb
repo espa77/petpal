@@ -28,7 +28,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-
+    binding.pry
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -86,6 +86,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:attachment, :content, :user_id)
+      params.require(:post).permit(:attachment, :content, :user_id, :favorite_id)
     end
 end

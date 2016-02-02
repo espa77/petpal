@@ -7,7 +7,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @post.user %>
+  <%= User.find(@post.user_id).name %>
 </p>
 
 <p>
@@ -36,5 +36,6 @@
 
 
 <%= render 'shared/actions', resource: @post %>
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+ <% if @post.user_id == current_user.id %>
+        <%= link_to 'Edit Post', edit_post_path(@post) %> | <%= link_to 'Delete Post', destroy_post_path(@post) %><br>
+<% end %>

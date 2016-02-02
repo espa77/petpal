@@ -17,7 +17,7 @@
       <tr>
         <td><img width="250" height="150" src="<%= post.attachment %>"></td>
         <td><%= post.content %></td>
-        <td><%= post.user %></td>
+        <td><%= User.find(post.user_id).name %></td>
         <td><%= link_to 'Show', post %></td>
         <% if current_user == post.user_id %>
         <td><%= link_to 'Edit', edit_post_path(post) %></td> |
