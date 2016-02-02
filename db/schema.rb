@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201193647) do
+ActiveRecord::Schema.define(version: 20160201212540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,16 +49,6 @@ ActiveRecord::Schema.define(version: 20160201193647) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "identities", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "provider"
-    t.string   "uid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
-
   create_table "posts", force: :cascade do |t|
     t.string   "attachment"
     t.text     "content"
@@ -68,6 +58,15 @@ ActiveRecord::Schema.define(version: 20160201193647) do
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "requests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "requests", ["user_id"], name: "index_requests_on_user_id", using: :btree
 
   create_table "uploads", force: :cascade do |t|
     t.string   "name"
@@ -119,6 +118,6 @@ ActiveRecord::Schema.define(version: 20160201193647) do
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
   add_foreign_key "favorites", "users"
-  add_foreign_key "identities", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "requests", "users"
 end
