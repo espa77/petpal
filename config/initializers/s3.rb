@@ -1,10 +1,13 @@
 
 CarrierWave.configure do |config|
+  config.root = Rails.root.join('tmp')
+  config.cache_dir = 'carrierwave'
+
   config.fog_credentials = {
-      :provider               => 'AWS',
-      :aws_access_key_id      => "AKIAJDM46HGHY22A4GCQ",
-      :aws_secret_access_key  => "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",
-      :region                 => 'us-east-1' # Change this for different AWS region. Default is 'us-east-1'
+      :provider => "AWS",
+      :aws_access_key_id => ENV["AWS_ACCESS_KEY"],
+      :aws_secret_access_key => ENV["AWS_SECRET_ACCESS_KEY"],
+      :region => "us-east-1"
   }
-  config.fog_directory  = "petpal"
+  config.fog_directory = ENV["AWS_BUCKET"]
 end

@@ -40,7 +40,14 @@
       <% @friend_num = friendship.friend_id %>
         <% @friend = User.find(@friend_num) %>
           <%= @friend.name %> <%= link_to "Check your friend's page!", "/users/#{@friend_num}/profile_page" %>  | <%= link_to 'Unfriend', unfriend_path(:friendship_id => friendship.id) %>
-<% end %>
+    <% end %>
+    <% @user.inverse_friendships.each do |friendship| %>
+      <% @friend_num = friendship.user_id %>
+      <% @friend = User.find(@friend_num) %>
+       <%= @friend.name %> <%= link_to "Check your friend's page!", "/users/#{@friend_num}/profile_page" %>  | <%= link_to 'Unfriend', unfriend_path(:friendship_id => friendship.id) %>
+    <% end %>
+
+
 
 
       </div>
