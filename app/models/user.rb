@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   acts_as_voter
 
+
+  @@photo_array=[]
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -38,4 +41,20 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  def all_photos
+    self.posts.each do |post|
+      if post.attachment.present?
+        @@photo_array=post.attachment
+      end
+      @@photo_array
+    end
+  end
+
+  def display_photos
+    all_photos.reverse
+  end
+
+
+
 end
