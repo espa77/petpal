@@ -10,7 +10,6 @@
   <%= @favorite.description %>
 </p>
 
-
 <%= link_to("Like This!", like_favorite_path) %><br>
 <% if @favorite.get_likes.size == 1 %>
   <%= "#{@favorite.get_likes.size} person likes this" %><br>
@@ -18,6 +17,41 @@
   <%= "#{@favorite.get_likes.size} people like this" %><br>
 <% end %>
 <%= link_to("Disike This!", unlike_favorite_path) %><br>
+
+<% if current_user.voted_up_on? @favorite %>
+  <%= render '/posts/form'  %>
+<% end %>
+
+<h4><strong>Community Feed</strong></h4>
+<% Post.all.each do |post| %>
+  <% if post.favorite_id == @favorite.id %>
+    <% if post.attachment == nil %>
+      <%= post.content %>
+    <% else %>
+    <p>
+      <%= post.attachment %> 
+      <h4><%= post.content %></h4>
+    </p>
+      <% if post.user_id == current_user.id %>
+        <%= link_to 'Edit Post', edit_post_path(post) %> | <%= link_to 'Delete Post', destroy_post_path(post) %><br>
+      <% end %>
+      <h4>Comments</h4>
+        <hr>
+          <%= render 'comments/form', commentable: post %>
+        <br>
+        <div class="comments">
+          <ul>
+            <%= render post.comments %>
+          </ul>
+        </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+
+
+
 
 <% if current_user.id == @favorite.user_id %>
 <%= link_to 'Edit', edit_favorite_path(@favorite) %> |

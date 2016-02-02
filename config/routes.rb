@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root to: 'home#front'
-  get 'posts/:id/destroy', to: 'posts#destroy'
+  get 'posts/:id/destroy', to: 'posts#destroy', :as => :destroy_post
   # post 'users/:id/profile_page', to: 'users#upload'
 
   get 'friendships/:id/destroy', to: 'friendships#destroy', :as => :unfriend
