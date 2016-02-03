@@ -3,7 +3,7 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {:multipart => true}) do |f| %>
   <%= devise_error_messages! %>
 
-
+<div id="form" class="col-sm-4 inner-right-sm animated fadeInUp">
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
@@ -62,7 +62,12 @@
 
   <br>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+<div class="col-sm-6 col-sm-offset-3">
+  <div>
+    <div class="actions">
+      <%= f.submit "Sign up", class: 'btn btn-small' %>
+    </div>
   </div>
+</div>
 <% end %>
+</div>
