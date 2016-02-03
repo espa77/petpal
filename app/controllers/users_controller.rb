@@ -5,6 +5,13 @@ class UsersController < ApplicationController
 
   def show
     @user=set_user
+    @hash = Gmaps4rails.build_markers (@user.locations) do |location, marker|
+      marker.lat location.latitude
+      marker.lng location.longitude
+       location.users.each do |x|
+         marker.infowindow x.name
+       end
+    end
   end
 
   def edit
@@ -29,6 +36,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :gender, :birthday, :species, :email, :password, :password_confirmation, :avatar)
+    params.require(:user).permit(:name, :gender, :birthday, :species, :email, :password, :password_confirmation, :avatar, :address, :latitude, :longitude)
   end
 end

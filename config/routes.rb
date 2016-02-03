@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :locations
   resources :uploads
   resources :comments, only: [:create, :destroy]
   resources :favorites
