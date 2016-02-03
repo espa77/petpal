@@ -13,7 +13,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if !!current_user %>
           <li><%= link_to('My Profile', "/users/#{current_user.id}/profile_page") %></li>
-          <li><%= link_to('Locations', locations_path) %></li>
+          <li><%= link_to('Hangouts', locations_path) %></li>
           <li><%= link_to('Favorite Communities', favorites_path) %></li>
           <li><%= link_to('Friends', users_index_path) %></li>
           <li><%= link_to('News Feed', posts_path) %></li>
