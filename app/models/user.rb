@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
   #user location joint table relationship
+  has_many :user_locations
   has_many :locations, through: :user_locations
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/pet-default.jpg"

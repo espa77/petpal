@@ -6,12 +6,21 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     if params[:search].present?
-      # @locations = Location.near(params[:search], 50, :order => :distance)
-      @locations = Location.near([current_user.latitude, current_user.longitude], 50, :order => :distance)
-
+      @locations = Location.near(params[:search], 50, :order => 'distance')
     else
       @locations = Location.all
+      @hash = Gmaps4rails.build_markers (@locations) do |location, marker|
+        marker.lat location.latitude
+        marker.lng location.longitude
+         location.users.each do |x|
+           marker.infowindow x.name
+         end
+      end
     end
+  end
+
+  def search
+
   end
 
   # GET /locations/1
@@ -37,6 +46,7 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
+        @location.users << current_user
         format.html { redirect_to @location, notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, location: @location }
       else
