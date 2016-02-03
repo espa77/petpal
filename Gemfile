@@ -29,6 +29,12 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+#using gem for google maps
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails'
+gem 'figaro'
+
 gem 'dotenv-rails', :groups => [:development, :test]
 
 # Use twitter bootstrap sass
