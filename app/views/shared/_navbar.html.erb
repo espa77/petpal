@@ -1,32 +1,85 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-top">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to "PetPal", root_url, class: "navbar-brand" %>
-    </div>
-    <div class="collapse navbar-collapse" id="navbar-top">
-      <ul class="nav navbar-nav navbar-right">
-        <% if !!current_user %>
-          <li><%= link_to('My Profile', "/users/#{current_user.id}/profile_page") %></li>
-          <li><%= link_to('Hangouts', locations_path) %></li>
-          <li><%= link_to('Favorite Communities', favorites_path) %></li>
-          <li><%= link_to('Friends', users_index_path) %></li>
-          <li><%= link_to('News Feed', posts_path) %></li>
-          <li><%= link_to('Sign Out', destroy_user_session_path) %></li>
+<nav class="navbar navbar-fixed-top">
 
-          <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
+				<div class="navbar-header">
+					<div class="container">
 
-        <% else %>
-          <li><%= link_to 'Sign up', '/users/sign_up' %></li>
-          <li><%= link_to 'Sign in', user_session_path %></li>
-          <li><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-</nav>
+						<a class="navbar-brand" href="index.html"><img src="assets/images/logo.svg" class="logo" alt=""></a>
+            <%= link_to "PetPal", root_url, class: "navbar-brand" %>
+						<!-- ============================================================= LOGO MOBILE : END ============================================================= -->
+
+						<a class="btn responsive-menu pull-right" data-toggle="collapse" data-target=".navbar-collapse"><i class='icon-menu-1'></i></a>
+
+					</div><!-- /.container -->
+				</div><!-- /.navbar-header -->
+
+				<div class="yamm">
+					<div class="navbar-collapse collapse">
+						<div class="container">
+
+							<!-- ============================================================= MAIN NAVIGATION ============================================================= -->
+
+						<ul class="nav navbar-nav">
+              <% if !!current_user %>
+								<li>
+                  <%= link_to('My Profile', "/users/#{current_user.id}/profile_page") %>
+								</li><!-- /.dropdown -->
+
+                <li>
+									<%= link_to('Friends', users_index_path) %>
+								</li><!-- /.dropdown -->
+
+                <li>
+									<%= link_to('Favorite Communities', favorites_path) %>
+								</li><!-- /.dropdown -->
+
+                <li>
+									<%= link_to('News Feed', posts_path) %>
+								</li><!-- /.dropdown -->
+
+                <li>
+									<%= link_to('Hangouts', locations_path) %>
+								</li><!-- /.dropdown -->
+
+                <li>
+									<%= link_to('Sign Out', destroy_user_session_path) %>
+								</li><!-- /.dropdown -->
+                <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
+
+              <% else %>
+              <li>
+                <%= link_to "PetPal", root_url %>
+              </li>
+                <li>
+                  <%= link_to 'Sign up', '/users/sign_up' %>
+                </li><!-- /.dropdown -->
+
+                <li>
+                  <%= link_to 'Sign in', user_session_path %>
+                </li><!-- /.dropdown -->
+
+                <li>
+                  <li><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+                </li><!-- /.dropdown -->
+                  <% end %>
+
+
+
+								<li class="dropdown pull-right searchbox">
+									<a href="#" class="dropdown-toggle js-activated"><i class="icon-search"></i></a>
+
+									<div class="dropdown-menu">
+										<form id="search" class="navbar-form search" role="search">
+											<input type="search" class="form-control" placeholder="Type to search">
+											<button type="submit" class="btn btn-default btn-submit icon-right-open"></button>
+										</form>
+									</div><!-- /.dropdown-menu -->
+								</li><!-- /.searchbox -->
+
+							</ul><!-- /.nav -->
+
+							<!-- ============================================================= MAIN NAVIGATION : END ============================================================= -->
+
+						</div><!-- /.container -->
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.yamm -->
+			</div><!-- /.navbar -->
