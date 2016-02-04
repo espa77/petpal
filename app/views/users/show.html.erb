@@ -5,44 +5,187 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js' type='text/javascript'></script>
 
 <%if @user == current_user %>
-<div class="container">
   <section id="hero">
-        
-        <div class="height-lg owl-inner-nav owl-ui-lg">
+        <div class="height-lg">
           <div class = "panel">
-          <div class="item" style="background-image: url( <%= asset_path('hero_forest.jpg')%>);">
+          <div class="item stretch" style="background-image: url( <%= asset_path('hero_forest.jpg')%>);">
             <div class="container">
               <div class="caption vertical-center text-center">
                 <div class="container">
-                  <div class = "img-circle">
-                  <%= image_tag @user.avatar.url, class: "img-circle" || 'pet-default.jpg', class: 'avatar'  "img-circle" %><br> 
+                    <div class = "space_from_top">
+                      <div class = "img-thumbnail">
+                  <%= image_tag @user.avatar.url || 'pet-default.jpg', class: 'avatar' %><br> 
+                    </div>
                   </div>
                 </div>
+                <div class = "space_from_top">
                   <h1 class="fadeInDown-1 light-color"><%= @user.name %></h1>
                     <p class="fadeInDown-2 medium-color"></p>
+                  </div>
                 
               </div><!-- /.caption -->
             </div><!-- /.container -->
           </div><!-- /.item -->
         </div>
+</div> 
+</section>
 </div>
 
+      <section id="who-we-are">
+        <div class="container inner-top inner-bottom-sm">
+          
+          <div class="row">
+            <div class="center-block text-center">
+              <header>
+                <h1>About Me</h1>
+                <p>I'm more than just an animal. I'm a companion, a friend, a buddy, a social-anxiety-reducing playmate.</p>
+              </header>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        
+          <div class="row inner-top-sm">
+            
+            <div class="col-md-1">
+              <div class="icon pull-right">
+                    <i> <%= image_tag('pawprint.png', class: "little-icon") %></i>
+              </div><!-- /.icon -->
+            </div><!-- /.col -->
+            
+            <div class="col-md-3 inner-bottom-xs">
+              <h2>Species</h2>
+              <p class="text-small"><%= @user.species %></p>
+            </div><!-- /.col -->
+            
+            <div class="col-md-1">
+              <div class="icon pull-right">
+                    <i> <%= image_tag('pawprint.png', class: "little-icon") %></i>
+              </div><!-- /.icon -->
+            </div><!-- /.col -->
+          
+            <div class="col-md-3 inner-bottom-xs">
+              <h2>Gender</h2>
+              <p class="text-small"><%= @user.gender %></p>
+            </div><!-- /.col -->
+            
+            <div class="col-md-1">
+              <div class="icon pull-right">
+                <i> <%= image_tag('pawprint.png', class: "little-icon") %></i>
+              </div><!-- /.icon -->
+            </div><!-- /.col -->
+          
+            <div class="col-md-3 inner-bottom-xs">
+              <h2>Birthday</h2>
+              <p class="text-small"><%= @user.birthday %></p>
+            </div><!-- /.col -->
+            
+          </div><!-- /.row -->
+        
+  
+      </section>
 
-  <div class="col-md-4 ">
-    <h3>My Biography</h3>
-    Name: <%= @user.name %> <br>
-    Species: <%= @user.species %> <br>
-    User: <%= @user.gender %> <br>
-    Birthday: <%= @user.birthday %> <br>
-  </div>
 
-  <br>
-  <br>
-  <br>
+  <section id="team" class="light-bg inner-xs inner-left-xs inner-right-xs">
+                
+              <h3 class="team-headline sidelines text-center"><span>My Friends</span></h3>
+
+              <div class="row thumbs gap-md text-center">
+                <% current_user.friends.each do |user|  %>
+                <div class="col-sm-2 thumb">
+                  <figure class="member">
+                    
+                    <div class="member-image">
+                    <div class= "friend-fit">
+                      
+                      <%= image_tag (user.avatar.url(:medium)) %>
+                    
+
+                
+                      </div>
+                          <figcaption class="member-details bordered no-top-border">
+                      <h3>
+                        <%= user.name %>
+                      </h3>
+                    </figcaption>
+                    </div><!-- /.member-image -->
+                   
+                  </figure>
+                </div><!-- /.col -->
+                 <% end %>
+              </row>
+              
+            </section>
+
+<section>
+
+<div class="container space_from_top dark-bg">
+<p>                                           
+</p>
+</div>
+</section>
+      <section id="latest-works" class="light-bg">
+        <div class="container inner text-center">
+          
+          <div class="row">
+              <header>
+                <h2 class="team-headline sidelines text-center"><span>My Photos</span></h2>
+                <p>Magnis modipsae que voloratati andigen daepeditem quiate re porem aut labor.</p>
+              </header>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+          
+          <div class="row inner-top-sm">
+            <div id="owl-latest-works" class="owl-carousel owl-item-gap">
+              <%@user.display_photos.each do |photo| %>
+              <div class="item">
+                <a href="portfolio-post.html">
+                  <figure>
+                    <figcaption class="text-overlay">
+                      <div class="info">
+                        <h4><%= photo.content %></h4>
+                        <p>Really Cool</p>
+                      </div><!-- /.info -->
+                    </figcaption>
+                    <div class="friend-fit">
+                    <%= image_tag photo.attachment.url(:small), class: "friend-fit" %>
+                    </div>
+                  </figure>
+                </a>
+              </div><!-- /.item -->
+              <% end %>
+             
+              
+            </div><!-- /.owl-carousel -->
+          </div><!-- /.row -->
+          
+        </div><!-- /.container -->
+      </section>
+      
+      <!-- ============================================================= SECTION – LATEST WORKS : END ============================================================= -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div>
     <div style='width: 400px;'>
-      <h4>My Hang Out Location:</h4>
+      <h4>Where I Live</h4>
       <div id="map" style='width: 250px; height: 150px;'></div>
     </div>
 
@@ -57,19 +200,6 @@
     });
     </script>
   </div>
-
-  <table>
-  <th>My Photos</th>
-    <%@user.display_photos.in_groups_of(3) do |photos| %>
-    <tr>
-      <% photos.each do |photo| %>
-      <% if photo %>
-      <td> <%= image_tag photo.attachment %></td>
-      <% end %>
-      <% end %>
-    </tr>
-    <% end  %>
-  </table>
 
 <div class="container">
 
