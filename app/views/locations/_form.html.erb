@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-
+<div id="form" class="col-sm-4 inner-right-sm animated fadeInUp">
   <div class="field">
     <%= f.label :address %><br>
     <%= f.text_field :address %>
@@ -23,7 +23,10 @@
     <%= f.label :longitude %><br>
     <%= f.text_field :longitude %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="col-sm-12 ">
+    <div class="actions">
+      <%= f.submit "Create New Location", class: 'btn btn-small' %>
+    </div>
   </div>
 <% end %>
+</div>
