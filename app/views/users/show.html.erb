@@ -1,5 +1,5 @@
  <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js' type='text/javascript'></script>
-  
+
   <%if @user == current_user %>
    <section id="hero">
     <div class="height-lg">
@@ -10,7 +10,7 @@
                   <div class="container">
     <div class = "space_from_top">
                         <div class = "img-thumbnail">
-                    <%= image_tag @user.avatar.url || 'pet-default.jpg', class: 'avatar' %><br> 
+                    <%= image_tag @user.avatar.url || 'pet-default.jpg', class: 'avatar' %><br>
                       </div>
                     </div>
                   </div>
@@ -18,18 +18,18 @@
                     <h1 class="fadeInDown-1 light-color"><%= @user.name %></h1>
                       <p class="fadeInDown-2 medium-color"></p>
                     </div>
-                  
+
                 </div><!-- /.caption -->
               </div><!-- /.container -->
             </div><!-- /.item -->
           </div>
-  </div> 
+  </div>
   </section>
   </div>
-  
+
         <section id="who-we-are">
           <div class="container inner-top inner-bottom-sm">
-            
+
             <div class="row">
               <div class="center-block text-center">
                 <header>
@@ -38,64 +38,64 @@
                 </header>
               </div><!-- /.col -->
             </div><!-- /.row -->
-          
+
             <div class="row inner-top-sm">
-              
+
               <div class="col-md-1">
                 <div class="icon pull-right">
                       <i> <%= image_tag('pawprint.png', class: "little-icon") %></i>
                 </div><!-- /.icon -->
               </div><!-- /.col -->
-              
+
               <div class="col-md-3 inner-bottom-xs">
                 <h2>Species</h2>
                 <p class="text-small"><%= @user.species %></p>
               </div><!-- /.col -->
-              
+
               <div class="col-md-1">
                 <div class="icon pull-right">
                       <i> <%= image_tag('pawprint.png', class: "little-icon") %></i>
                 </div><!-- /.icon -->
               </div><!-- /.col -->
-            
+
               <div class="col-md-3 inner-bottom-xs">
                 <h2>Gender</h2>
                 <p class="text-small"><%= @user.gender %></p>
               </div><!-- /.col -->
-              
+
               <div class="col-md-1">
                 <div class="icon pull-right">
                   <i> <%= image_tag('pawprint.png', class: "little-icon") %></i>
                 </div><!-- /.icon -->
               </div><!-- /.col -->
-            
+
               <div class="col-md-3 inner-bottom-xs">
                 <h2>Birthday</h2>
                 <p class="text-small"><%= @user.birthday %></p>
               </div><!-- /.col -->
-              
+
             </div><!-- /.row -->
-          
-    
+
+
         </section>
-  
-  
+
+
     <section id="team" class="light-bg inner-xs inner-left-xs inner-right-xs">
-                  
+
                 <h3 class="team-headline sidelines text-center"><span>My Friends</span></h3>
-  
+
                 <div class="row thumbs gap-md text-center">
                   <% current_user.friends.each do |user|  %>
                   <div class="col-sm-2 thumb">
                     <figure class="member">
-                      
+
                       <div class="member-image">
                       <div class= "friend-fit">
-                        
+
                         <%= image_tag (user.avatar.url(:medium)) %>
-                      
-  
-                  
+
+
+
                         </div>
                             <figcaption class="member-details bordered no-top-border">
                         <h3>
@@ -103,24 +103,24 @@
                         </h3>
                       </figcaption>
                       </div><!-- /.member-image -->
-                     
+
                     </figure>
                   </div><!-- /.col -->
                    <% end %>
                 </row>
-                
+
               </section>
-  
+
   <section>
-  
+
   <div class="container space_from_top dark-bg">
-  <p>                                           
+  <p>
   </p>
   </div>
   </section>
         <section id="latest-works" class="light-bg">
           <div class="container inner text-center">
-            
+
             <div class="row">
                 <header>
                   <h2 class="team-headline sidelines text-center"><span>My Photos</span></h2>
@@ -128,7 +128,7 @@
                 </header>
               </div><!-- /.col -->
             </div><!-- /.row -->
-            
+
             <div class="row inner-top-sm">
               <div id="owl-latest-works" class="owl-carousel owl-item-gap">
                 <%@user.display_photos.each do |photo| %>
@@ -148,14 +148,14 @@
                   </a>
                 </div><!-- /.item -->
                 <% end %>
-               
-                
+
+
               </div><!-- /.owl-carousel -->
             </div><!-- /.row -->
-            
+
           </div><!-- /.container -->
         </section>
-        
+
      <div class="col-md-4">
         <h3> My Hangout Locations </h3>
         <% if @user.locations == [] %>
@@ -165,10 +165,10 @@
          <div id="map" style='width: 250px; height: 150px;'></div>
         </div>
         <% end %>
-  
-  
+
+
       <br>
-  
+
       <script type="text/javascript">
      handler = Gmaps.build('Google');
      handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
@@ -178,9 +178,22 @@
      });
       </script>
     </div>
-  
+
+
     <h2>Friend Requests</h2>
+    <% Request.all.each do |request| %>
+   <% if request.friend_id == current_user.id %>
+   <!--add in logic to not show requests after accepted -->
+   <%= "#{User.find(request.user_id).name} would like to be your friend" %>
+     <%= form_for :friendship, url: add_friend_path do |f| %>
+       <%= f.hidden_field :friend_id, :value => request.user_id %>
+       <%= f.hidden_field :user_id, :value => request.friend_id %>
+       <%= f.hidden_field :request_id, :value => request.id %>
+       <div class="col-sm-3 col-sm-offset-3">
+       <%= f.submit "Accept", class: 'btn btn-small' %> <br>
+     </div>
+    <% end %>
+   <% end %>
+ <% end %>
       <li><%= link_to('Edit Profile', edit_user_registration_path) %></li>
-      </div>
   <% end %>
-  
