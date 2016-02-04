@@ -83,7 +83,7 @@ Rails.application.configure do
       },
       :fog_directory => ENV["AWS_BUCKET"]
     }
- 
+
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new

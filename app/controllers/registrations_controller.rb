@@ -4,7 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super
     if resource.save
-      UserNotifier.send_signup_email(@user).deliver
+      UserNotifier.send_signup_email(@user).deliver_now
     end
   end
 
