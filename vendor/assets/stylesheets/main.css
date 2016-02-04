@@ -561,6 +561,10 @@ figure.post-media + * {
 }
 .member .member-image {
   position: relative;
+  width: 163.328px;
+  height: 164px;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 .member figcaption {
   position: relative;
@@ -581,6 +585,9 @@ figure.post-media + * {
   font-size: 16px;
   line-height: 130%;
   margin-bottom: 10px;
+  min-height: 38px;
+  max-height: 38px;
+
 }
 .member figcaption h2 span {
   font-size: 18px;

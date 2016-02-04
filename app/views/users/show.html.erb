@@ -14,7 +14,9 @@
             <div class="container">
               <div class="caption vertical-center text-center">
                 <div class="container">
-                  <%= render "users/shared/profile_picture" %><br> 
+                  <div class = "img-circle">
+                  <%= image_tag @user.avatar.url, class: "img-circle" || 'pet-default.jpg', class: 'avatar'  "img-circle" %><br> 
+                  </div>
                 </div>
                   <h1 class="fadeInDown-1 light-color"><%= @user.name %></h1>
                     <p class="fadeInDown-2 medium-color"></p>
