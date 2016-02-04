@@ -71,9 +71,38 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
+  # paperclip production settings for amazon s3
+
+  config.paperclip_defaults = {
+      :storage => :fog,
+      :fog_credentials => {
+        :provider               => 'AWS',                        # required
+        :aws_access_key_id      => ENV["AWS_ACCESS_KEY_ID"],
+        :aws_secret_access_key  => ENV["AWS_SECRET_ACCESS_KEY"],
+        :region                 => ENV["AWS_REGION"]
+      },
+      :fog_directory => ENV["AWS_BUCKET"]
+    }
+ 
+
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { :host => 'gentle-castle-93237.herokuapp.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "gmail.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["gmail_username"],
+    password: ENV["gmail_password"]
+  }
 end

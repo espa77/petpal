@@ -55,7 +55,4 @@ class User < ActiveRecord::Base
   def display_photos
     all_photos.reverse
   end
-
-
-
 end
