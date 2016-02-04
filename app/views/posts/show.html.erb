@@ -1,21 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Attachment:</strong>
-  <%= image_tag @post.attachment.url(:large) %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= User.find(@post.user_id).name %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-
 
 <div class="post format-image">
 
@@ -33,17 +17,17 @@
   <div class="post-content">
 
     <figure class="icon-overlay icn-link post-media">
-      <a href="blog-post.html"><%= image_tag @post.attachment.url(:small) %></a>
+      <a href="blog-post.html"><%= image_tag @post.attachment.url(:medium) %></a>
     </figure><!-- /.post-media -->
 
     <h2 class="post-title">
-      <a href="blog-post.html">The girl and the summerlight</a>
+      <a href="/users/<%=@post.user_id%>"><%= User.find(@post.user_id).name %></a>
     </h2>
 
     <ul class="meta">
       <li class="categories"><a href="#">Photography</a></li>
-      <li class="comments"><a href="#">63</a></li>
-      <li class="likes"><a href="#">114</a></li>
+      <li class="comments"><a href="#"> <%= @post.comments.length %></a></li>
+      <li class="likes"><a href="#"> <%= @post.get_likes.size  %></a></li>
     </ul><!-- /.meta -->
 
     <p>Magnis modipsae que lib voloratati andigen daepeditem quiate ut repore autem labor. Laceaque quiae sitiorem rest non restibusaes es tumquam core posae volor remped modis volor. Doloreiur qui commolu oreprerum.</p>

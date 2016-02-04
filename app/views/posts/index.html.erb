@@ -97,17 +97,20 @@
                     </h2>
 
                     <ul class="meta">
-                      <li class="categories"><a href="#">Photography</a></li>
-                      <li class="comments"><a href="#">63</a></li>
-                      <li class="likes"><a href="#">114</a></li>
+                      <li class="categories"><a href="/posts/<%=post.id%>">Photography</a></li>
+                      <li class="comments"><a href="/posts/<%=post.id%>"><%= post.comments.length %></a></li>
+                      <li class="likes"><a href="/posts/<%=post.id%>"> <%= post.get_likes.size %></a></li>
                     </ul><!-- /.meta -->
 
                     <p><%=post.content %></p>
 
+										<ul>
+											<li><a href="/posts/<%=post.id%>" class="btn">Show Post</a></li>
                     <% if current_user == post.user_id %>
-                    <a href="/posts/<%=post.id%>/edit" class="btn">Edit Post</a>
-                    <a href="posts/<%=post.id%>/destroy" class="btn">Delete Post</a>
+                    	<li><a href="/posts/<%=post.id%>/edit" class="btn">Edit Post</a></li>
+                    	<li><a href="posts/<%=post.id%>/destroy" class="btn">Delete Post</a></li>
                     <% end %>
+									</ul>
 
                   </div><!-- /.post-content -->
 
