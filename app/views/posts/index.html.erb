@@ -72,13 +72,15 @@
                       <li class="likes"><a href="/posts/<%=post.id%>"> <%= post.get_likes.size %></a></li>
                     </ul><!-- /.meta -->
                     <p><%=post.content %></p>
+                    <!-- button stuff -->
                     <ul>
-                      <li><a href="/posts/<%=post.id%>" class="btn">Show Post</a></li>
+                      <a href="/posts/<%=post.id%>" class="btn">Show Post</a>
                     <% if current_user.id == post.user_id %>
-                      <li><a href="/posts/<%=post.id%>/edit" class="btn">Edit Post</a></li>
-                      <li><a href="posts/<%=post.id%>/destroy" class="btn">Delete Post</a></li>
+                      <a href="/posts/<%=post.id%>/edit" class="btn">Edit Post</a>
+                      <a href="posts/<%=post.id%>/destroy" class="btn">Delete Post</a>
                     <% end %>
-                  </ul>
+                    </ul>
+
                   </div><!-- /.post-content -->
                 </div><!-- /.post -->
                 <% end %>
