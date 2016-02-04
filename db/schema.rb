@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202200509) do
+ActiveRecord::Schema.define(version: 20160202215102) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +31,18 @@ ActiveRecord::Schema.define(version: 20160202200509) do
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "dogshows", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "pic_1"
+    t.string   "pic_2"
+    t.string   "pic_3"
+    t.string   "pic_4"
+    t.string   "pic_5"
+    t.integer  "fraud_prevention", default: [],              array: true
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
   create_table "favorites", force: :cascade do |t|
     t.string   "attachment"

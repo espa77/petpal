@@ -5,15 +5,28 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js' type='text/javascript'></script>
 
 <%if @user == current_user %>
-  <h1><%= @user.name %>'s Profile Page</h1>
-
-
-
 <div class="container">
-  <%= render "users/shared/profile_picture" %><br>
-  <strong>Profile Picture</strong>
-
+  <section id="hero">
+        
+        <div class="height-lg owl-inner-nav owl-ui-lg">
+          <div class = "panel">
+          <div class="item" style="background-image: url( <%= asset_path('hero_forest.jpg')%>);">
+            <div class="container">
+              <div class="caption vertical-center text-center">
+                <div class="container">
+                  <div class = "img-circle">
+                  <%= image_tag @user.avatar.url, class: "img-circle" || 'pet-default.jpg', class: 'avatar'  "img-circle" %><br> 
+                  </div>
+                </div>
+                  <h1 class="fadeInDown-1 light-color"><%= @user.name %></h1>
+                    <p class="fadeInDown-2 medium-color"></p>
+                
+              </div><!-- /.caption -->
+            </div><!-- /.container -->
+          </div><!-- /.item -->
+        </div>
 </div>
+
 
   <div class="col-md-4 ">
     <h3>My Biography</h3>
@@ -51,7 +64,7 @@
     <tr>
       <% photos.each do |photo| %>
       <% if photo %>
-      <td> <%= image_tag photo.attachment.url(:thumb) %></td>
+      <td> <%= image_tag photo.attachment %></td>
       <% end %>
       <% end %>
     </tr>
