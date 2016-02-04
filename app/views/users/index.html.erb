@@ -1,26 +1,27 @@
-<div class = "container">
-<section id="team" class="light-bg inner-xs inner-left-xs inner-right-xs">
+
+
+
+
+        <section id="team" class="light-bg inner-xs inner-left-xs inner-right-xs">
                 
               <h3 class="team-headline sidelines text-center"><span>Make New Friends</span></h3>
-              
-              <div class="row thumbs gap-md text-center">
 
-            <% @users.each do |user|%> 
+              <div class="row thumbs gap-md text-center">
+                <% @users.each do |user|  %>
                 <div class="col-sm-2 thumb">
-                  <figure class="member"> 
-                      
-                      <!-- There is an issue with sizing here -->
+                  <figure class="member">
+                    
                     <div class="member-image">
                       
-                      <%= image_tag ('http://lorempixel.com/400/400/') %>
-              
+        
+                      
+                      <%= image_tag (user.avatar.url(:medium)) %>
                       
                     </div><!-- /.member-image -->
                     
                     <figcaption class="member-details bordered no-top-border">
                       <h3>
-                        <%= user.name %>
-                        <span><%= user.species %></span>
+                        <%= Faker::Name.name %>
                       </h3>
                     </figcaption>
                       <%= form_for :friendship, url: requests_path do |f| %>
@@ -30,6 +31,7 @@
                       <% end %>
                   </figure>
                 </div><!-- /.col -->
-              <% end %> 
-              </div><!-- /.row -->
-      </div><!-- /.container -->
+                 <% end %>
+              </row>
+              
+            </section>
