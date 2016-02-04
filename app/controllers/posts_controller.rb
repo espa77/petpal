@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all.select {|post| post.favorite_id == nil}
+    @random_post_attachment = Post.all[rand(0..(Post.all.length-1))].attachment
   end
 
   # GET /posts/1
