@@ -156,13 +156,28 @@
           </div><!-- /.container -->
         </section>
         
-        <div>
-      <div style='width: 400px;'>
-       <div id="map" style='width: 250px; height: 150px;'></div>
-      </div>
-     </script>
+     <div class="col-md-4">
+        <h3> My Hangout Locations </h3>
+        <% if @user.locations == [] %>
+         <%= link_to 'Create new Hangout location', new_location_path %>
+       <% else %>
+       <div style='width: 400px;'>
+         <div id="map" style='width: 250px; height: 150px;'></div>
+        </div>
+        <% end %>
+  
+  
+      <br>
+  
+      <script type="text/javascript">
+     handler = Gmaps.build('Google');
+     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+       markers = handler.addMarkers(<%=raw @hash.to_json %>);
+       handler.bounds.extendWith(markers);
+       handler.fitMapToBounds();
+     });
+      </script>
     </div>
-     <div class="container">
   
     <h2>Friend Requests</h2>
       <li><%= link_to('Edit Profile', edit_user_registration_path) %></li>
