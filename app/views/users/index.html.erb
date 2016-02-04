@@ -1,8 +1,35 @@
-<% @users.each do |user|%>
-  Name: <%= user.name %><br>
-  <%= form_for :friendship, url: requests_path do |f| %>
-    <%= f.hidden_field :friend_id, :value => user.id %>
-    <%= f.hidden_field :user_id, :value => current_user.id %>
-    <%= f.submit "Add Friend" %> <br>
-  <% end %>
-<% end %> 
+<div class = "container">
+<section id="team" class="light-bg inner-xs inner-left-xs inner-right-xs">
+                
+              <h3 class="team-headline sidelines text-center"><span>Make New Friends</span></h3>
+              
+              <div class="row thumbs gap-md text-center">
+
+            <% @users.each do |user|%> 
+                <div class="col-sm-4 thumb">
+                  <figure class="member"> 
+                      
+                      <!-- There is an issue with sizing here -->
+                    <div class="member-image">
+                      
+                      <%= image_tag ('http://placehold.it/200x200') %>
+              
+                      
+                    </div><!-- /.member-image -->
+                    
+                    <figcaption class="member-details bordered no-top-border">
+                      <h3>
+                        <%= user.name %>
+                        <span><%= user.species %></span>
+                      </h3>
+                    </figcaption>
+                      <%= form_for :friendship, url: requests_path do |f| %>
+                        <%= f.hidden_field :friend_id, :value => user.id %>
+                        <%= f.hidden_field :user_id, :value => current_user.id %>
+                        <%= f.submit "Add Friend", class: "btn btn-medium" %> <br>
+                      <% end %>
+                  </figure>
+                </div><!-- /.col -->
+              <% end %> 
+              </div><!-- /.row -->
+      </div><!-- /.container -->

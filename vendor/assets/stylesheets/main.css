@@ -561,6 +561,7 @@ figure.post-media + * {
 }
 .member .member-image {
 	position: relative;
+  
 }
 .member figcaption {
 	position: relative;
