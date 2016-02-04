@@ -1,6 +1,13 @@
 class RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters, :only => [:create]
 
+  def create
+    super
+    if resource.save
+      UserNotifier.send_signup_email(@user).deliver
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
