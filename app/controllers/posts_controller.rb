@@ -5,7 +5,10 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all.select {|post| post.favorite_id == nil}
-    @random_post = Post.all[rand(0..(Post.all.length-1))]
+    if Post.all.length>0
+      @random_post = Post.all[rand(0..(Post.all.length-1))]
+    end
+
   end
 
   # GET /posts/1
