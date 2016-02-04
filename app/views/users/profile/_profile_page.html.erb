@@ -10,7 +10,7 @@
 <% @user.friends.each do |friend| %>
   <div class="container">
 
-    <%= friend.name %> <%= link_to 'Check out your friend\'s page!', "users/#{friend.id}/profile_page" %> <%= link_to 'Unfriend', unfriend_path %> 
+    <%= friend.name %> <%= link_to 'Check out your friend\'s page!', "users/#{friend.id}/profile_page" %> <%= link_to 'Unfriend', unfriend_path %>
 
   </div>
 <% end %>

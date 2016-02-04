@@ -7,8 +7,10 @@ class LocationsController < ApplicationController
   def index
     if params[:search].present?
       @locations = Location.near(params[:search], 50, :order => 'distance')
+
     else
-      @locations = Location.all
+      # @location = set_location
+       @locations = Location.all
       @hash = Gmaps4rails.build_markers (@locations) do |location, marker|
         marker.lat location.latitude
         marker.lng location.longitude
@@ -27,6 +29,7 @@ class LocationsController < ApplicationController
   # GET /locations/1.json
   def show
     @location = set_location
+    @user = set_user
   end
 
   # GET /locations/new
@@ -37,6 +40,7 @@ class LocationsController < ApplicationController
   # GET /locations/1/edit
   def edit
     @location = set_location
+
   end
 
   # POST /locations
@@ -84,6 +88,10 @@ class LocationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_location
       @location = Location.find(params[:id])
+    end
+
+    def set_user
+      @user = User.find(current_user.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
