@@ -43,7 +43,7 @@
                 <li>
 									<%= link_to('Sign Out', destroy_user_session_path) %>
 								</li><!-- /.dropdown -->
-                <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
+                <li class="round-image"><%= image_tag(current_user.avatar.url(:thumb), class: "round-image") %></li>
 
               <% else %>
               <li>

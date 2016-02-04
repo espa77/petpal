@@ -3265,6 +3265,8 @@ blockquote:before {
      -moz-background-size: cover;
      -o-background-size: cover;
       background-size: cover;
+      margin-right: -10px; 
+      margin-left: -10px;
 }
 #owl-main.height-md .item {
   height: 61vh;
