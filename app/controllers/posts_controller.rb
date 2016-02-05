@@ -61,15 +61,23 @@ class PostsController < ApplicationController
   end
 
   def like
-
+    # binding.pry
     @post = Post.find(params[:id])
     @post.liked_by current_user
+    respond_to do |format|
+
+      format.js { }
+      format.html { redirect_to @post }
+    end
   end
 
   def unlike
     @post = Post.find(params[:id])
     @post.downvote_by current_user
-
+    respond_to do |format|
+      format.js { }
+      format.html { redirect_to @post }
+    end
   end
 
   # DELETE /posts/1
