@@ -33,4 +33,62 @@
 
 <br>
 
-<%= link_to 'New Favorite', new_favorite_path %>
+
+
+      <section id="blog" class="light-bg">
+        <div class="container inner-top-sm inner-bottom classic-blog no-sidebar">
+          <ul class="text-center">
+            <% if @favorites.length==0 %>
+            <h4>There are no favorites on your feed, why not start this whole thing? </h4>
+            <% end  %>
+          <a href="/favorites/new" class="btn">New Favorite</a><br><br><br><br>
+          </ul>
+          <div class="row inner-bottom-xs">
+            <div class="col-sm-12">
+                <ul class="filter text-center">
+                  <li><a href="#" data-filter=".photography">Photography</a></li>
+                </ul><!-- /.filter -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+          <div class="row">
+            <div class="col-md-9 center-block">
+              <div class="favorites sidemeta">
+
+<!-- with image attachment -->
+                <% @favorites.reverse.each do |favorite|  %>
+                <% if favorite.attachment %>
+                <div class="favorite format-image">
+                  <div class="date-wrapper">
+                    <div class="date">
+                      <span class="Date"><%= favorite.created_at.to_s.split[0] %></span>
+                    </div><!-- /.date -->
+                  </div><!-- /.date-wrapper -->
+                  <div class="format-wrapper">
+                    <a href="#" data-filter=".format-image"><i class="round-image-50"><%= image_tag(User.find(favorite.user_id).avatar.url(:thumb)) %></i></a>
+                  </div><!-- /.format-wrapper -->
+                  <div class="favorite-content">
+                    <figure class="icn-link favorite-media">
+                      <a href="/favorites/<%=favorite.id%>"><%= image_tag favorite.attachment.url(:hrect_md) %></a>
+                    </figure><!-- /.favorite-media -->
+                    <h2 class="favorite-title">
+                      <a href="/favorites/<%=favorite.id%>">The girl and the summerlight</a>
+                    </h2>
+
+                    <ul class="meta">
+                      <li class="categories"><a href="/favorites/<%=favorite.id%>">Photography</a></li>
+                      <li class="comments"><a href="/favorites/<%=favorite.id%>"><%= favorite.comments.length %></a></li>
+
+                    <% if (favorite.get_likes.select {|vote| vote.voter_id==current_user.id}) !=[] %>
+                      <li class="likes">
+
+                        <%= link_to("#{favorite.get_likes.length}", unlike_favorite_path(favorite), remote: true) %>
+                      </li>
+                    <% elsif (favorite.get_likes.select {|vote| vote.voter_id==current_user.id})==[] %>
+                      <li class="likes">
+                          <%= link_to("#{favorite.get_likes.length}", like_favorite_path(favorite), remote: true) %>
+                      </li>
+                    <% end %>
+                    <% end %>
+                    <% end %>
+
+                    </ul><!-- /.meta -->
