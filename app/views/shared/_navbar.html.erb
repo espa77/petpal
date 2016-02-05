@@ -24,6 +24,30 @@
                   <%= link_to('My Profile', "/users/#{current_user.id}/profile_page") %>
 								</li><!-- /.dropdown -->
 
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle js-activated">Friend Requests</a>
+                  <ul class="dropdown-menu">
+                  <% friendly = false %>
+                    <% Request.all.each do |request| %>
+                    <% if request.friend_id == current_user.id %>
+                    <% friendly = true %>
+                    <li>   <%= "#{User.find(request.user_id).name} would like to be your friend" %>
+     <%= form_for :friendship, url: add_friend_path do |f| %>
+       <%= f.hidden_field :friend_id, :value => request.user_id %>
+       <%= f.hidden_field :user_id, :value => request.friend_id %>
+       <%= f.hidden_field :request_id, :value => request.id %>
+       <%= f.submit "Accept", class: 'btn btn-small' %>
+       <% end %>
+   <% end %>
+    <% end %>
+  <% if friendly == false %>
+   <a href="#">You have no requests.</a>
+ <% end %>
+
+       </li>
+                  </ul>
+                </li><!-- /.dropdown -->
+
                 <li>
 									<%= link_to('Friends', users_index_path) %>
 								</li><!-- /.dropdown -->

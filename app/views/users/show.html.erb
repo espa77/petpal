@@ -10,7 +10,7 @@
                   <div class="container">
     <div class = "space_from_top">
                         <div class = "img-thumbnail">
-                    <%= image_tag @user.avatar.url || 'pet-default.jpg', class: 'avatar' %><br>
+                    <%= image_tag @user.avatar.url(:medium) || 'pet-default.jpg', class: 'avatar' %><br>
                       </div>
                     </div>
                   </div>
@@ -33,7 +33,7 @@
             <div class="row">
               <div class="center-block text-center">
                 <header>
-                  <h1>About Me</h1>
+                  <h1><strong>About Me</strong></h1>
                   <p>I'm more than just an animal. I'm a companion, a friend, a buddy, a social-anxiety-reducing playmate.</p>
                 </header>
               </div><!-- /.col -->
@@ -82,24 +82,24 @@
 
     <section id="team" class="light-bg inner-xs inner-left-xs inner-right-xs">
 
-                <h3 class="team-headline sidelines text-center"><span>My Friends</span></h3>
+                <h3 class="team-headline sidelines text-center"><span><strong>My Friends</strong></span></h3>
 
                 <div class="row thumbs gap-md text-center">
-                  <% current_user.friends.each do |user|  %>
+                  <% current_user.my_friends.each do |id|  %>
                   <div class="col-sm-2 thumb">
                     <figure class="member">
 
                       <div class="member-image">
                       <div class= "friend-fit">
 
-                        <%= image_tag (user.avatar.url(:medium)) %>
+                        <%= image_tag (User.find(id).avatar.url(:medium)) %>
 
 
 
                         </div>
                             <figcaption class="member-details bordered no-top-border">
                         <h3>
-                          <%= user.name %>
+                          <%= User.find(id).name %>
                         </h3>
                       </figcaption>
                       </div><!-- /.member-image -->
@@ -111,78 +111,88 @@
 
               </section>
 
-  <section>
-
-  <div class="container space_from_top dark-bg">
-  <p>
-  </p>
+<section>
+  <div class="spacebar light-bg">
   </div>
-  </section>
-        <section id="latest-works" class="light-bg">
-          <div class="container inner text-center">
+</section>
 
-            <div class="row">
+
+  <section id="latest-works" class="light-bg">
+        <div class="container inner">
+          
+          <div class="row">
+            <div class="team-headline center-block sidelines text-center">
+              <header>
+                <h1><strong>My Photos</strong></h1>
+              </header>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+          
+          <div class="row inner-top-sm">
+            <div id="owl-latest-works" class="owl-carousel owl-item-gap">
+              <% @user.display_photos.each do |photo| %>
+              <div class="item">
+                <a href="portfolio-post.html">
+                  <figure>
+                    <figcaption class="text-overlay">
+                      <div class="info">
+                        <h4>Vintage Bicycles</h4>
+                        <p>Interactive</p>
+                      </div><!-- /.info -->
+                    </figcaption>
+                    <%= image_tag photo.attachment %>
+                  </figure>
+                </a>
+              </div><!-- /.item -->
+              <% end %>
+              
+            </div><!-- /.owl-carousel -->
+          </div><!-- /.row -->
+          
+        </div><!-- /.container -->
+      </section>
+        
+
+
+
+        <div class="row pricing">
+
+            
+            <div class="col-md-12 col-sm-8 inner-top-sm center">
+              <div class="plan">
+                
                 <header>
-                  <h2 class="team-headline sidelines text-center"><span>My Photos</span></h2>
-                  <p>Magnis modipsae que voloratati andigen daepeditem quiate re porem aut labor.</p>
-                </header>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
+                  <h2>My Hangout</h2>
+                  
+                <% if @user.locations == [] %>
+                
+                <%= link_to 'Create new Hangout location', new_location_path, class: "btn" %>
 
-            <div class="row inner-top-sm">
-              <div id="owl-latest-works" class="owl-carousel owl-item-gap">
-                <%@user.display_photos.each do |photo| %>
-                <div class="item">
-                  <a href="portfolio-post.html">
-                    <figure>
-                      <figcaption class="text-overlay">
-                        <div class="info">
-                          <h4><%= photo.content %></h4>
-                          <p>Really Cool</p>
-                        </div><!-- /.info -->
-                      </figcaption>
-                      <div class="friend-fit">
-                      <%= image_tag photo.attachment.url(:small), class: "friend-fit" %>
-                      </div>
-                    </figure>
-                  </a>
-                </div><!-- /.item -->
+                <% else %>
+                    <div id="map" class="center" style='width: 500px; height: 400px; margin: 0 auto;'></div>
                 <% end %>
-
-
-              </div><!-- /.owl-carousel -->
-            </div><!-- /.row -->
-
-          </div><!-- /.container -->
-        </section>
-
-     <div class="col-md-4">
-        <h3> My Hangout Locations </h3>
-        <% if @user.locations == [] %>
-         <%= link_to 'Create new Hangout location', new_location_path %>
-       <% else %>
-       <div style='width: 400px;'>
-         <div id="map" style='width: 250px; height: 150px;'></div>
-        </div>
-        <% end %>
+                  
+                  
+                </header>
+                
+                <ul class="features">
+                  <li><i class="icon-window"></i> </li>
+                </ul><!-- /.features -->
+                
+              </div><!-- /.plan -->
+            </div><!-- /.col -->
 
 
       <br>
 
-      <script type="text/javascript">
-     handler = Gmaps.build('Google');
-     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-       markers = handler.addMarkers(<%=raw @hash.to_json %>);
-       handler.bounds.extendWith(markers);
-       handler.fitMapToBounds();
-     });
-      </script>
+  
     </div>
 
 
-    <h2>Friend Requests</h2>
+   
     <% Request.all.each do |request| %>
    <% if request.friend_id == current_user.id %>
+    <h2>Friend Requests</h2>
    <!--add in logic to not show requests after accepted -->
    <%= "#{User.find(request.user_id).name} would like to be your friend" %>
      <%= form_for :friendship, url: add_friend_path do |f| %>
@@ -195,5 +205,14 @@
     <% end %>
    <% end %>
  <% end %>
-      <li><%= link_to('Edit Profile', edit_user_registration_path) %></li>
+      <%= link_to('Edit Profile', edit_user_registration_path, class: "col-sm-offset-1 btn btn-small" )%>
   <% end %>
+
+  <script type="text/javascript">
+     handler = Gmaps.build('Google');
+     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+       markers = handler.addMarkers(<%=raw @hash.to_json %>);
+       handler.bounds.extendWith(markers);
+       handler.fitMapToBounds();
+     });
+  </script>

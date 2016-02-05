@@ -55,4 +55,16 @@ class User < ActiveRecord::Base
   def display_photos
     all_photos.reverse
   end
+
+  def my_friends
+    friends = []
+    self.friends.each do |friend|
+      friends << friend.id
+    end
+    self.inverse_friends.each do |friend|
+      friends << friend.id
+    end
+    friends
+  end
+
 end
