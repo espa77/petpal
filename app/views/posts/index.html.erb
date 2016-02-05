@@ -76,15 +76,21 @@
                     <h2 class="post-title">
                       <a href="/posts/<%=post.id%>">The girl and the summerlight</a>
                     </h2>
+
                     <ul class="meta">
                       <li class="categories"><a href="/posts/<%=post.id%>">Photography</a></li>
                       <li class="comments"><a href="/posts/<%=post.id%>"><%= post.comments.length %></a></li>
-                    <% if current_user.voted_up_on? post %>
-                      <li class="likes"><a href="/posts/<%=post.id%>/unlike"> <%= post.get_likes.size %></a></li>
-                    <% else %>
-                      <li class="likes"><a href="/posts/<%=post.id%>/like"> <%= post.get_likes.size %></a></li>
-                    <% end %>
 
+                    <% if (post.get_likes.select {|vote| vote.voter_id==current_user.id}) !=[] %>
+                      <li class="likes">
+          
+                        <%= link_to("#{post.get_likes.length}", unlike_post_path(post), remote: true) %>
+                      </li>
+                    <% elsif (post.get_likes.select {|vote| vote.voter_id==current_user.id})==[] %>
+                      <li class="likes">
+                          <%= link_to("#{post.get_likes.length}", like_post_path(post), remote: true) %>
+                      </li>
+                    <% end %>
                     </ul><!-- /.meta -->
 
 
