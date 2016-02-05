@@ -1,24 +1,23 @@
-<%if @user == current_user %>
+<%# if @user == current_user %>
 <p id="notice"><%= notice %></p>
 
-  <% @user.locations.each do |x| %>
+  <%# @user.locations.each do |x| %>
     <p>
       <strong>Address:</strong>
-      <%= x.address %>
+      <%= @location.address %>
     </p>
 
     <p>
       <strong>Latitude:</strong>
-      <%= x.latitude %>
+      <%= @location.latitude %>
     </p>
 
     <p>
       <strong>Longitude:</strong>
-      <%= x.longitude %>
+      <%= @location.longitude %>
     </p>
-    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
-  <% end %>
-
+    <%# image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+  <%# end %>
   <br>
 
   <div style='width: 800px;'>
@@ -27,16 +26,17 @@
 
   <br>
 
+  <script type="text/javascript">
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    // debugger;
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(14);
+  });
+  </script>
 
-    <script type="text/javascript">
-    handler = Gmaps.build('Google');
-    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-      // debugger;
-      markers = handler.addMarkers(<%=raw @hash.to_json %>);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-    });
-    </script>
 
 
 <h3>Nearby locations</h3>
@@ -47,8 +47,7 @@
   </ul>
 
 <p>
-  <%= link_to "Edit", edit_location_path(@location) %> |
-  <%= link_to "Destroy", @location, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", locations_path %>
+  <%= link_to "Edit", edit_location_path(@location), class: 'btn btn-small' %>
+  <%= link_to "Destroy", @location, class: 'btn btn-small', :confirm => 'Are you sure?', :method => :delete %>
+  <%= link_to "View All", locations_path, class: 'btn btn-small' %>
 </p>
-<% end %>
