@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p class="favorite_community_photo">
-  <td><%= image_tag @favorite.attachment.url || 'pet_community_photo.jpg', class: 'attachment', width: '350' %></td>
+  <td><%= image_tag @favorite.attachment.url(:hrect_sm) || 'pet_community_photo.png', class: 'attachment' %></td>
 </p>
 
 <h1><%= @favorite.title %></h1>
@@ -29,7 +29,7 @@
       <%= post.content %>
     <% else %>
     <p>
-      <%= post.attachment %> 
+      <%= post.attachment %>
       <h4><%= post.content %></h4>
     </p>
       <% if post.user_id == current_user.id %>

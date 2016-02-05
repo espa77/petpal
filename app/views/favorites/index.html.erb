@@ -17,7 +17,7 @@
   <tbody>
     <% @favorites.each do |favorite| %>
       <tr>
-        <td><img width="250" height="150" src="<%= favorite.attachment %>"></td>
+        <td><%= image_tag favorite.attachment.url(:hrect_sm) || 'pet_community_photo.png', class: 'attachment' %></td>
         <td><%= favorite.title %></td>
         <td><%= link_to 'Show', favorite %></td>
         <% if current_user.id == favorite.user_id %>
