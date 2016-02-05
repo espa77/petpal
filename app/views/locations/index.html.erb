@@ -5,10 +5,12 @@
   <%= form_tag locations_path, :method => :get do %>
     <p>
     <div id="form" class="col-sm-6 inner-right-md animated fadeInUp">
-      <%= text_field_tag :search, params[:search] %>
+      <%= text_field_tag :search, params[:search], placeholder: 'Type here' %>
       <div class="col-sm-6 col-sm-offset-3">
         <%= submit_tag "Find Pals Nearby", class: 'btn btn-small', :name => nil %>
+        <%= link_to "Back", locations_path, class: 'btn btn-small' %>
       </div>
+
     </div>
     </p>
   <% end %>
@@ -30,6 +32,7 @@
             </thead>
 
             <tbody>
+              <% if params[:search].present? %>
                 <% @locations.each do |location| %>
                   <% location.users.each do |x| %>
                 <tr>
@@ -42,6 +45,7 @@
                 </tr>
                   <% end %>
                 <% end %>
+              <% end %>
             </tbody>
           </table>
 
@@ -49,13 +53,7 @@
     </div>
   </div>
 
-
-
-
-
   <br>
-
-
 
   <br>
 
@@ -72,5 +70,6 @@
     markers = handler.addMarkers(<%=raw @hash.to_json %>);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
+    handler.getMap().setZoom(10);
   });
   </script>

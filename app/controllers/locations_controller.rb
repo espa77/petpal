@@ -6,30 +6,32 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     if params[:search].present?
-      @locations = Location.near(params[:search], 50, :order => 'distance')
-
-    else
-      # @location = set_location
-       @locations = Location.all
-      @hash = Gmaps4rails.build_markers (@locations) do |location, marker|
-        marker.lat location.latitude
-        marker.lng location.longitude
-         location.users.each do |x|
-           marker.infowindow x.name
-         end
+      @locations = Location.near(params[:search], 10, :order => 'distance')
+      if @locations == []
+        flash[:notice] = "No Users Found!"
+      else
+        @hash = Gmaps4rails.build_markers (@locations) do |location, marker|
+          marker.lat location.latitude
+          marker.lng location.longitude
+           location.users.each do |x|
+             marker.infowindow x.name
+           end
+        end
       end
     end
-  end
-
-  def search
-
   end
 
   # GET /locations/1
   # GET /locations/1.json
   def show
     @location = set_location
-    @user = set_user
+      @hash = Gmaps4rails.build_markers (@location) do |location, marker|
+        marker.lat location.latitude
+        marker.lng location.longitude
+         location.users.each do |x|
+           marker.infowindow x.name
+         end
+      end
   end
 
   # GET /locations/new
