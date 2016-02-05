@@ -59,12 +59,21 @@ class User < ActiveRecord::Base
   def my_friends
     friends = []
     self.friends.each do |friend|
-      friends << friend.id
+      friends << friend
     end
     self.inverse_friends.each do |friend|
-      friends << friend.id
+      friends << friend
     end
     friends
   end
+
+  def find_friendship(unfriender, friend)
+    Friendship.all.each do |friendship|
+      if (friendship.user_id == friend.id && friendship.friend_id == unfriender.id) || (friendship.user_id == unfriender.id && friendship.friend_id == friend.id)
+        my_friendship = friendship
+        return my_friendship
+      end
+    end
+  end 
 
 end

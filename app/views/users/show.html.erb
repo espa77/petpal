@@ -1,6 +1,6 @@
  <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js' type='text/javascript'></script>
 
-  <%if @user == current_user %>
+ 
    <section id="hero">
     <div class="height-lg">
       <div class = "panel">
@@ -27,6 +27,7 @@
   </section>
   </div>
 
+
         <section id="who-we-are">
           <div class="container inner-top inner-bottom-sm">
 
@@ -34,7 +35,7 @@
               <div class="center-block text-center">
                 <header>
                   <h1><strong>About Me</strong></h1>
-                  <p>I'm more than just an animal. I'm a companion, a friend, a buddy, a social-anxiety-reducing playmate.</p>
+                  <p>I'm more than just an animal. I'm a companion, a friend, a buddy, and a social-anxiety-reducing playmate.</p>
                 </header>
               </div><!-- /.col -->
             </div><!-- /.row -->
@@ -85,21 +86,22 @@
                 <h3 class="team-headline sidelines text-center"><span><strong>My Friends</strong></span></h3>
 
                 <div class="row thumbs gap-md text-center">
-                  <% current_user.my_friends.each do |id|  %>
+                  <% current_user.my_friends.each do |friend|  %>
+                 
                   <div class="col-sm-2 thumb">
                     <figure class="member">
 
                       <div class="member-image">
                       <div class= "friend-fit">
 
-                        <%= image_tag (User.find(id).avatar.url(:medium)) %>
+                        <%= image_tag (friend.avatar.url(:medium)) %>
 
 
 
                         </div>
                             <figcaption class="member-details bordered no-top-border">
                         <h3>
-                          <%= User.find(id).name %>
+                          <%= link_to("#{friend.name}", profile_page_path(friend.id)) %>
                         </h3>
                       </figcaption>
                       </div><!-- /.member-image -->
@@ -116,6 +118,7 @@
   </div>
 </section>
 
+ <%if current_user.my_friends.include?(@user) || @user == current_user %>
 
   <section id="latest-works" class="light-bg">
         <div class="container inner">
@@ -132,15 +135,13 @@
             <div id="owl-latest-works" class="owl-carousel owl-item-gap">
               <% @user.display_photos.each do |photo| %>
               <div class="item">
-                <a href="portfolio-post.html">
                   <figure>
+                   <%= link_to((image_tag photo.attachment), "/posts/#{photo.id}")%>
                     <figcaption class="text-overlay">
                       <div class="info">
-                        <h4>Vintage Bicycles</h4>
-                        <p>Interactive</p>
+                        <h4><%= photo.content %></h4>
                       </div><!-- /.info -->
                     </figcaption>
-                    <%= image_tag photo.attachment %>
                   </figure>
                 </a>
               </div><!-- /.item -->
