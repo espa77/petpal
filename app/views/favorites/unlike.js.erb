@@ -1,0 +1,2 @@
+$('[href="/favorites/<%= @favorite.id %>/unlike"]').text("<%=@favorite.get_likes.size%>");
+$('[href="/favorites/<%= @favorite.id %>/unlike"]').attr("href", "/favorites/<%= @favorite.id %>/like");
