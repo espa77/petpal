@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+<div class="post format-image">
+  <div class="date-wrapper">
+    <div class="date">
+      <span class="day">10</span>
+      <span class="month">May</span>
+    </div><!-- /.date -->
+  </div><!-- /.date-wrapper -->
+  <div class="format-wrapper">
+    <a href="#" data-filter=".format-image"><i class="icon-picture-1"></i></a>
+  </div><!-- /.format-wrapper -->
+  <div class="post-content">
+    <figure class="icon-overlay icn-link post-media">
+      <%= image_tag @post.attachment.url(:medium) %>
+    </figure><!-- /.post-media -->
+    <h2 class="post-title">
+
+      <a href="/users/<%=@post.user_id%>">
+        <%= User.find(@post.user_id).name %>
+      </a>
+
+    </h2>
+    <ul class="meta">
+      <li class="categories"><a href="#">Photography</a></li>
+      <li class="comments"><a href="#"> <%= @post.comments.length %></a></li>
+      <li class="likes"><a href="#"> <%= @post.get_likes.size  %></a></li>
+    </ul><!-- /.meta -->
+    <br><br>
+    <p>
+      <font size="4"> <%= @post.content %></font>
+    </p>
+    <!-- <a href="blog-post.html" class="btn">Read more</a> -->
+  </div><!-- /.post-content -->
+</div><!-- /.post -->
+
+  <%= link_to("Like This!", like_post_path) %><br>
+    <% if @post.get_likes.size == 1 %>
+      <%= "#{@post.get_likes.size} person likes this" %>
+    <% else @post.get_likes.size > 1 %>
+      <%= "#{@post.get_likes.size} people like this" %>
+    <% end %>
+    <br><%= link_to("Disike This!", unlike_post_path) %><br>
+<h4>Comments</h4>
+<hr>
+<%= render 'comments/form', commentable: @post %>
+<br>
+<div class="comments">
+  <ul>
+    <%= render @comments %>
+  </ul>
+</div>
+<%= render 'shared/actions', resource: @post %>
+ <% if @post.user_id == current_user.id %>
+        <%= link_to 'Edit Post', edit_post_path(@post) %> | <%= link_to 'Delete Post', destroy_post_path(@post) %><br>
+<% end %>
