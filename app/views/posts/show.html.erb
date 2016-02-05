@@ -1,47 +1,301 @@
-<p id="notice"><%= notice %></p>
-<div class="post format-image">
-  <div class="date-wrapper">
-    <div class="date">
-      <span class="day">10</span>
-      <span class="month">May</span>
-    </div><!-- /.date -->
-  </div><!-- /.date-wrapper -->
-  <div class="format-wrapper">
-    <a href="#" data-filter=".format-image"><i class="icon-picture-1"></i></a>
-  </div><!-- /.format-wrapper -->
-  <div class="post-content">
-    <figure class="icon-overlay icn-link post-media">
-      <%= image_tag @post.attachment.url(:medium) %>
-    </figure><!-- /.post-media -->
-    <h2 class="post-title">
-      <a href="/users/<%=@post.user_id%>"><%= User.find(@post.user_id).name %></a>
-    </h2>
-    <ul class="meta">
-      <li class="categories"><a href="#">Photography</a></li>
-      <li class="comments"><a href="#"> <%= @post.comments.length %></a></li>
-      <li class="likes"><a href="#"> <%= @post.get_likes.size  %></a></li>
-    </ul><!-- /.meta -->
-    <p>Magnis modipsae que lib voloratati andigen daepeditem quiate ut repore autem labor. Laceaque quiae sitiorem rest non restibusaes es tumquam core posae volor remped modis volor. Doloreiur qui commolu oreprerum.</p>
-    <a href="blog-post.html" class="btn">Read more</a>
-  </div><!-- /.post-content -->
-</div><!-- /.post -->
-<%= link_to("Like This!", like_post_path) %><br>
-<% if @post.get_likes.size == 1 %>
-  <%= "#{@post.get_likes.size} person likes this" %>
-<% else @post.get_likes.size > 1 %>
-  <%= "#{@post.get_likes.size} people like this" %>
-<% end %>
-<br><%= link_to("Disike This!", unlike_post_path) %><br>
-<h4>Comments</h4>
-<hr>
-<%= render 'comments/form', commentable: @post %>
-<br>
-<div class="comments">
-  <ul>
-    <%= render @comments %>
-  </ul>
-</div>
-<%= render 'shared/actions', resource: @post %>
- <% if @post.user_id == current_user.id %>
-        <%= link_to 'Edit Post', edit_post_path(@post) %> | <%= link_to 'Delete Post', destroy_post_path(@post) %><br>
-<% end %>
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>REEN</title>
+
+		<!-- Bootstrap Core CSS -->
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Customizable CSS -->
+		<link href="assets/css/main.css" rel="stylesheet" data-skrollr-stylesheet>
+		<link href="assets/css/green.css" rel="stylesheet" title="Color">
+		<link href="assets/css/owl.carousel.css" rel="stylesheet">
+		<link href="assets/css/owl.transitions.css" rel="stylesheet">
+		<link href="assets/css/animate.min.css" rel="stylesheet">
+
+		<!-- Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Lato:400,900,300,700" rel="stylesheet">
+		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic" rel="stylesheet">
+
+		<!-- Icons/Glyphs -->
+		<link href="assets/fonts/fontello.css" rel="stylesheet">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="assets/images/favicon.ico">
+
+		<!-- HTML5 elements and media queries Support for IE8 : HTML5 shim and Respond.js -->
+		<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<!-- ============================================================= HEADER ============================================================= -->
+
+		<!-- ============================================================= HEADER : END ============================================================= -->
+
+
+		<!-- ============================================================= MAIN ============================================================= -->
+
+		<main>
+
+			<!-- ============================================================= SECTION – POPULAR POSTS ============================================================= -->
+
+			<!-- ============================================================= SECTION – POPULAR POSTS : END ============================================================= -->
+
+
+			<!-- ============================================================= SECTION – BLOG POST ============================================================= -->
+
+			<section id="blog-post" class="light-bg">
+				<div class="container inner-top-sm inner-bottom classic-blog no-sidebar">
+					<div class="row">
+						<div class="col-md-9 center-block">
+							<div class="sidemeta">
+
+                    <div class="post format-image">
+                      <div class="date-wrapper">
+                        <div class="date">
+                          <span class="day">10</span>
+                          <span class="month">May</span>
+                        </div><!-- /.date -->
+                      </div><!-- /.date-wrapper -->
+                      <div class="format-wrapper">
+                        <a href="#" data-filter=".format-image"><i class="icon-picture-1"></i></a>
+                      </div><!-- /.format-wrapper -->
+                      <div class="post-content">
+                        <figure class="icon-overlay icn-link post-media">
+                          <%= image_tag @post.attachment.url(:small) %>
+                        </figure><!-- /.post-media -->
+                        <h2 class="post-title">
+
+                          <a href="/users/<%=@post.user_id%>">
+                            <%= User.find(@post.user_id).name %>
+                          </a>
+
+                        </h2>
+                        <ul class="meta">
+                          <li class="comments"><a href="#"> <%= @post.comments.length %></a></li>
+                          <li class="likes"><a href="#"> <%= @post.get_likes.size  %></a></li>
+                        </ul><!-- /.meta -->
+
+                        <p>
+                          <font size="4"> <%= @post.content %></font>
+                        </p>
+                        <!-- <a href="blog-post.html" class="btn">Read more</a> -->
+                        <br>
+                        <ul>
+                          <% if current_user.id == @post.user_id %>
+                            <a href="/posts/<%=@post.id%>/edit" class="btn">Edit Post</a>
+                            <a href="posts/<%=@post.id%>/destroy" class="btn">Delete Post</a>
+                          <% end %>
+                        </ul>
+                      </div><!-- /.post-content -->
+                    </div><!-- /.post -->
+
+
+
+								<div id="comments">
+									<h2>5 Comments</h2>
+									<ol class="commentlist">
+										<li class="comment">
+											<div class="avatar icon-overlay icn-link">
+												<a href="#"><img src="assets/images/art/human02.jpg" alt=""></a>
+											</div><!-- /.avatar -->
+
+											<div class="commentbody">
+
+												<div class="author">
+													<h3><a href="#">Jennifer Fox</a></h3>
+													<div class="meta">
+														<span class="date">about 5 hours ago</span>
+													</div><!-- /.meta -->
+												</div><!-- /.author -->
+
+												<div class="message">
+													<p>Magnis modipsae que lib voloratati andigen daepeditem ut repro labor. Laceaque quiae sitiorem rest non restibusaes es tumquam core posae volor remped modis volor. Doloreiur qui commolu ptatemp dolupta oreprerum aut tibusam. Eumenis et consent accullignis dentibea autem inisita posae volor conecus resto explabo que voloratati andigen emperum quiae sitiorem.</p>
+													<ul class="meta">
+														<li class="reply"><a href="#">Reply</a></li>
+														<li class="votes">24</li>
+														<li class="upvote"><a href="#"><i class="icon-thumbs-up"></i></a></li>
+														<li class="downvote"><a href="#"><i class="icon-thumbs-down"></i></a></li>
+													</ul><!-- /.meta -->
+												</div><!-- /.message -->
+
+											</div><!-- /.commentbody -->
+										</li><!-- /.comment -->
+
+										<li class="comment">
+											<div class="avatar icon-overlay icn-link">
+												<a href="#"><img src="assets/images/art/human03.jpg" alt=""></a>
+											</div><!-- /.avatar -->
+
+											<div class="commentbody">
+
+												<div class="author">
+													<h3><a href="#">Chris Cavill</a></h3>
+													<div class="meta">
+														<span class="date">about 4 hours ago</span>
+													</div><!-- /.meta -->
+												</div><!-- /.author-->
+
+												<div class="message">
+													<p>Conecus iure posaemne voloris remped modis aut accabora incim resto explaboris eictemperum quiae sitiorem. Doloreiur qui commolu ptatemp dolupta oreprerum tibusam emnis et consent accullignis.</p>
+													<ul class="meta">
+														<li class="reply"><a href="#">Reply</a></li>
+														<li class="votes">18</li>
+														<li class="upvote"><a href="#"><i class="icon-thumbs-up"></i></a></li>
+														<li class="downvote"><a href="#"><i class="icon-thumbs-down"></i></a></li>
+													</ul><!-- /.meta -->
+												</div><!-- /.message -->
+
+											</div><!-- /.commentbody -->
+
+											<ul class="children">
+												<li class="comment">
+													<div class="avatar icon-overlay icn-link">
+														<a href="#"><img src="assets/images/art/human01.jpg" alt=""></a>
+													</div><!-- /.avatar -->
+
+													<div class="commentbody">
+
+														<div class="author">
+															<h3><a href="#">Amber Jones</a></h3>
+															<div class="meta">
+																<span class="date">about 2 hours ago</span>
+															</div><!-- /.meta -->
+														</div><!-- /.author -->
+
+														<div class="message">
+															<p>Laceaque quiae sitiorem rest non restibusaes es tumquam core posae volor remped modis volor. Magnis modipsae que lib volorati andigen daepeditem ut repro labor. Menis et consent accullignis dentibea autem inisita eictemperum quiae posae volor.</p>
+															<ul class="meta">
+																<li class="reply"><a href="#">Reply</a></li>
+																<li class="votes">20</li>
+																<li class="upvote"><a href="#"><i class="icon-thumbs-up"></i></a></li>
+																<li class="downvote"><a href="#"><i class="icon-thumbs-down"></i></a></li>
+															</ul><!-- /.meta -->
+														</div><!-- /.message -->
+
+													</div><!-- /.commentbody -->
+
+													<ul class="children">
+														<li class="comment">
+															<div class="avatar icon-overlay icn-link">
+																<a href="#"><img src="assets/images/art/human04.jpg" alt=""></a>
+															</div><!-- /.avatar -->
+
+															<div class="commentbody">
+
+																<div class="author">
+																	<h3><a href="#">Toby Evans</a></h3>
+																	<div class="meta">
+																		<span class="date">about 1 hour ago</span>
+																	</div><!-- /.meta -->
+																</div><!-- /.author -->
+
+																<div class="message">
+																	<p>Magnis modipsae que lib voloratati andigen daep editem ut repro labor. Laceaque quiae sitiorem rest non restibsae es tumquam core posae volor remped modis volor. Doloreiur qui commolu ptatemp dolupta oreprum aut tibusam. Eumenis et consent accullignis dentibea autem inisita posae volor conecus resto explabo que voloratati andigen emperum quiae sitiorem.</p>
+																	<ul class="meta">
+																		<li class="reply"><a href="#">Reply</a></li>
+																		<li class="votes">9</li>
+																		<li class="upvote"><a href="#"><i class="icon-thumbs-up"></i></a></li>
+																		<li class="downvote"><a href="#"><i class="icon-thumbs-down"></i></a></li>
+																	</ul><!-- /.meta -->
+																</div><!-- /.message -->
+
+															</div><!-- /.commentbody -->
+														</li><!-- /.comment -->
+													</ul><!-- /.children -->
+												</li><!-- /.comment -->
+											</ul><!-- /.children -->
+										</li><!-- /.comment -->
+
+										<li class="comment">
+											<div class="avatar icon-overlay icn-link">
+												<a href="#"><img src="assets/images/art/human05.jpg" alt=""></a>
+											</div><!-- /.avatar -->
+
+											<div class="commentbody">
+
+												<div class="author">
+													<h3><a href="#">Sophie Adams</a></h3>
+													<div class="meta">
+														<span class="date">about 20 minutes ago</span>
+													</div><!-- /.meta -->
+												</div><!-- /.author -->
+
+												<div class="message">
+													<p>Conecus iure posae volor remped modisatae aut accabora incim resto explaboris eictemperum quiae sitiorem. Doloreiur qui commolu ptatemp dolupta oreprerum tibusam emnis et consent accullignis. Doloreiur qui commolu ptatemp dolupta oreprerum aut tibusam. Eumenis et consent accullignis dentibea autem inisita posae volor conecus resto explabo voloratati andigen emperum quiae sitiorem rest non restibsae.</p>
+													<ul class="meta">
+														<li class="reply"><a href="#">Reply</a></li>
+														<li class="votes">3</li>
+														<li class="upvote"><a href="#"><i class="icon-thumbs-up"></i></a></li>
+														<li class="downvote"><a href="#"><i class="icon-thumbs-down"></i></a></li>
+													</ul><!-- /.meta -->
+												</div><!-- /.message -->
+
+											</div><!-- /.commentbody -->
+										</li><!-- /.comment -->
+									</ol><!-- /.commentlist -->
+								</div><!-- /#comments -->
+
+								<div class="comment-form-wrapper">
+									<h2>Leave a Comment</h2>
+
+									<form id="commentform" class="forms" action="" method="post">
+
+										<div class="row">
+											<div class="col-sm-6">
+												<input type="text" name="name" class="form-control" placeholder="Name (Required)">
+											</div><!-- /.col -->
+										</div><!-- /.row -->
+
+										<div class="row">
+											<div class="col-sm-6">
+												<input type="email" name="email" class="form-control" placeholder="Email (Required)">
+											</div><!-- /.col -->
+										</div><!-- /.row -->
+
+										<div class="row">
+											<div class="col-sm-6">
+												<input type="text" name="website" class="form-control" placeholder="Website">
+											</div><!-- /.col -->
+										</div><!-- /.row -->
+
+										<div class="row">
+											<div class="col-sm-12">
+												<textarea name="message" class="form-control" placeholder="Enter your comment ..."></textarea>
+											</div><!-- /.col -->
+										</div><!-- /.row -->
+
+										<button type="submit" class="btn btn-default btn-submit">Submit comment</button>
+
+									</form>
+
+									<div id="response"></div>
+								</div><!-- /.comment-form-wrapper -->
+
+							</div><!-- /.sidemeta -->
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.container -->
+			</section>
+
+			<!-- ============================================================= SECTION – BLOG POST : END ============================================================= -->
+
+		</main>
+
+		<!-- ============================================================= MAIN : END ============================================================= -->
+
+		<!-- For demo purposes – can be removed on production : End -->
+	</body>
+</html>
