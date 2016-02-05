@@ -84,8 +84,12 @@
 
                         </h2>
                         <ul class="meta">
-                          <li class="comments"><a href="#"> <%= @post.comments.length %></a></li>
-                          <li class="likes"><a href="#"> <%= @post.get_likes.size  %></a></li>
+                          	<li class="comments"><a href="#"> <%= @post.comments.length %></a></li>
+													<% if current_user.voted_up_on? @post %>
+														<li class="likes"><a href="/posts/<%=@post.id%>/unlike"> <%= @post.get_likes.size %></a></li>
+													<% else %>
+														<li class="likes"><a href="/posts/<%=@post.id%>/like"> <%= @post.get_likes.size %></a></li>
+													<% end %>
                         </ul><!-- /.meta -->
 
                         <p>
@@ -103,7 +107,7 @@
                     </div><!-- /.post -->
 
 
-
+<!-- comments -->
 								<div id="comments">
 									<h2>5 Comments</h2>
 									<ol class="commentlist">

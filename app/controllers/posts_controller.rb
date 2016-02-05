@@ -64,13 +64,11 @@ class PostsController < ApplicationController
 
     @post = Post.find(params[:id])
     @post.liked_by current_user
-    redirect_to @post
   end
 
   def unlike
     @post = Post.find(params[:id])
     @post.downvote_by current_user
-    redirect_to @post
 
   end
 

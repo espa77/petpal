@@ -52,12 +52,14 @@
                   <li><a href="#" data-filter=".photography">Photography</a></li>
                 </ul><!-- /.filter -->
             </div><!-- /.col -->
-          <a href="/posts/new" class="btn">New Post</a><br><br><br><br>
         </div><!-- /.row -->
           <div class="row">
             <div class="col-md-9 center-block">
               <div class="posts sidemeta">
+
+<!-- with image attachment -->
                 <% @posts.reverse.each do |post|  %>
+                <% if post.attachment %>
                 <div class="post format-image">
                   <div class="date-wrapper">
                     <div class="date">
@@ -77,8 +79,15 @@
                     <ul class="meta">
                       <li class="categories"><a href="/posts/<%=post.id%>">Photography</a></li>
                       <li class="comments"><a href="/posts/<%=post.id%>"><%= post.comments.length %></a></li>
-                      <li class="likes"><a href="/posts/<%=post.id%>"> <%= post.get_likes.size %></a></li>
+                    <% if current_user.voted_up_on? post %>
+                      <li class="likes"><a href="/posts/<%=post.id%>/unlike"> <%= post.get_likes.size %></a></li>
+                    <% else %>
+                      <li class="likes"><a href="/posts/<%=post.id%>/like"> <%= post.get_likes.size %></a></li>
+                    <% end %>
+
                     </ul><!-- /.meta -->
+
+
                     <p><%=post.content %></p>
                     <!-- button stuff -->
                     <ul>
@@ -91,15 +100,50 @@
 
                   </div><!-- /.post-content -->
                 </div><!-- /.post -->
+  <!-- without attachment               -->
+                <% elsif !post.attachment %>
+
+                <div class="post format-standard">
+
+                  <div class="date-wrapper">
+                    <div class="date">
+                      <span class="Date"><%= post.created_at.to_s.split[0] %></span>
+                    </div><!-- /.date -->
+                  </div><!-- /.date-wrapper -->
+
+                  <div class="format-wrapper">
+                    <a href="#" data-filter=".format-image"><i class="round-image-50"><%= image_tag(User.find(post.user_id).avatar.url(:thumb)) %></i></a>
+                  </div><!-- /.format-wrapper -->
+
+                  <div class="post-content">
+
+                    <h2 class="post-title">
+                      <a href="blog-post.html"> <%= User.find(post.user_id).name %> </a>
+                    </h2>
+
+                    <ul class="meta">
+                      <li class="categories"><a href="/posts/<%=post.id%>">Written Post</a></li>
+                      <li class="comments"><a href="/posts/<%=post.id%>"><%= post.comments.length %></a></li>
+                      <li class="likes"><a href="/posts/<%=post.id%>"> <%= post.get_likes.size %></a></li>
+                    </ul><!-- /.meta -->
+
+                    <p><%=post.content %></p>
+
+                    <ul>
+                      <a href="/posts/<%=post.id%>" class="btn">Show Post</a>
+                    <% if current_user.id == post.user_id %>
+                      <a href="/posts/<%=post.id%>/edit" class="btn">Edit Post</a>
+                      <a href="posts/<%=post.id%>/destroy" class="btn">Delete Post</a>
+                    <% end %>
+                    </ul>
+
+                  </div><!-- /.post-content -->
+
+                </div><!-- /.post -->
+                <% end  %>
+
                 <% end %>
               </div>
-              <ul class="pagination">
-                <li><a href="#">Prev</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">Next</a></li>
-              </ul><!-- /.pagination -->
           </div>  <!--  col -->
             <aside class="col-md-3">
               <div class="sidebox widget">
