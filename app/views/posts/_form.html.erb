@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+<div id="form" class="col-sm-4 inner-right-sm animated fadeInUp">
   <div class="field">
     <%= f.label :attachment %><br>
     <%= f.file_field :attachment %>
@@ -27,7 +28,10 @@
       <%= f.hidden_field :favorite_id, :value => @favorite.id %>
     </div>
   <% end %>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="actions">
+      <%= f.submit class: 'btn btn-small' %>
+    </div>
   </div>
 <% end %>
+</div>
