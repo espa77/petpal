@@ -15,7 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'paperclip'
 # resizing image to fit a certain scale
 gem 'rmagick', require: false
 #amazon persist photos onto heroku
