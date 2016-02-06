@@ -6,6 +6,9 @@ class FavoritesController < ApplicationController
   # GET /favorites.json
   def index
     @favorites = Favorite.all
+    if Favorite.all.length>0
+      @random_favorite = Favorite.all[rand(0..(Favorite.all.length-1))]
+    end
   end
 
   # GET /favorites/1

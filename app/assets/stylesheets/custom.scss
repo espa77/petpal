@@ -8,5 +8,8 @@
     width: 50px;
     overflow: hidden;
     text-align: center;
-    img { width: 100% }
+    img {
+      width: 100%;
+      border-radius: 50px;
+    }
 }

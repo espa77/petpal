@@ -175,12 +175,12 @@ a.gray:hover {
 }
 ol {
   position: relative;
-  padding-left: 22px;
+  padding-left: 3px;
 }
 ul {
     list-style: none;
   position: relative;
-  padding-left: 22px;
+  padding-left: 3px;
 }
 ul.arrowed li,
 ul.circled li,
@@ -1288,7 +1288,7 @@ aside .thumb figure {
   padding: 0;
 }
 .thumbs.gap-xs {
-  margin-left: -5px;
+  margin-left: 0;
   margin-right: 0;
 }
 .thumbs.gap-xs .thumb {
@@ -2796,7 +2796,7 @@ blockquote:before {
   display: block;
   position: absolute;
   top: 50%;
-  width: 100%;
+  width: 97%;
   border-bottom: 1px solid #CED7E0;
 }
 .filter li,
@@ -3265,7 +3265,7 @@ blockquote:before {
      -moz-background-size: cover;
      -o-background-size: cover;
       background-size: cover;
-      margin-right: -10px; 
+      margin-right: -10px;
       margin-left: -10px;
 }
 #owl-main.height-md .item {
@@ -3805,8 +3805,7 @@ input:focus:-ms-input-placeholder {
 }
 .meta li:after {
   /*content: "\0399";*/
-  content: "|";
-    margin-left: 12px;
+  content: "";
 }
 .meta li:last-child:after {
   content: "";
@@ -3814,7 +3813,6 @@ input:focus:-ms-input-placeholder {
 .classic-blog .sidemeta,
 .classic-blog .pagination {
   padding-left: 59px;
-  border-left: 1px solid #CED7E0;
   margin-left: 30px;
 }
 .classic-blog .post .date-wrapper {
@@ -3907,7 +3905,7 @@ input:focus:-ms-input-placeholder {
     text-align: center;
     color: #1ABB9C;
     line-height: 1;
-  border: 1px solid #1ABB9C;
+    border: 1px solid #1ABB9C;
     border-radius: 50%;
 }
 .sidemeta .format-wrapper a:hover {
@@ -4134,6 +4132,7 @@ input:focus:-ms-input-placeholder {
 .sidebox.widget form,
 .sidebox.widget input {
     margin: 0;
+    padding-right: 20px;
 }
 .sidebox.widget input {
     border-radius: 3px;
@@ -4308,7 +4307,7 @@ input:focus:-ms-input-placeholder {
     height: 60px;
 }
 #comments .commentbody {
-  padding-left: 22px;
+  padding-left: 3px;
     overflow: hidden;
 }
 #comments .author {
