@@ -33,7 +33,7 @@ figure:not(.icon-overlay) > a:hover {
   opacity: .7;
 }
 img[src*=".svg"] {
-  height: 100%;
+  height: 5%;
 }
 iframe {
     border: none;
