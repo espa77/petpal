@@ -4,7 +4,7 @@ class FriendshipsController < ApplicationController
     if current_user.id == params[:friendship][:friend_id].to_i
       flash[:notice] = 'Cannot add yourself.'
       redirect_to profile_page_path(current_user)
-    elsif current_user.friends != [] && current_user.friends.include?(User.find(params[:friendship][:friend_id]))
+    elsif current_user.friends != [] && current_user.my_friends.include?(User.find(params[:friendship][:friend_id]))
         flash[:notice] = "Unable to add friend."
         redirect_to users_index_path
     else
