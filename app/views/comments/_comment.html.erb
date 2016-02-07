@@ -1,25 +1,25 @@
-<div id="comment-<%= comment.id %>">
-  <div class="info">
-    <h4 class="email"><%= comment.user.name %></h4>
-  </div>
-  <div class="content">
-    <div class="row">
-      <span class="text"><%= comment.comment %></span><br>
-       <%= link_to("Like This!", like_comment_path(:commentable_type => comment.commentable_type, :post_id => comment.commentable_id, :id => comment.id)) %><br>
-       <% if comment.get_likes.size == 1 %>
-        <%= "#{comment.get_likes.size} person likes this" %>
-      <% elsif comment.get_likes.size > 1 %>
-        <%= "#{comment.get_likes.size} people like this" %>
-      <% end %>
-         <%= link_to("Dislike This!", unlike_comment_path(:commentable_type => comment.commentable_type, :post_id => comment.commentable_id, :id => comment.id)) %><br>
-    <div class="pull-left">
-      <% if belongs_to_user?(comment) %>
-        <%= link_to comment_path(comment), method: :delete, class: 'btn btn-danger btn-sm', remote: true do %>
-          <% fa_icon 'trash' %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-  <br>
-  <hr>
-</div>
+<li class="comment">
+  <div class="avatar icon-overlay icn-link">
+    <a href="/users/<%= comment.user.id%>"><%= image_tag(User.find(comment.user.id).avatar.url(:thumb)) %></a>
+  </div><!-- /.avatar -->
+
+  <div class="commentbody">
+
+    <div class="author">
+      <h3><a href="#"><%= comment.user.name %></a></h3>
+      <div class="meta">
+        <span class="date"><%= comment.created_at %></span>
+      </div><!-- /.meta -->
+    </div><!-- /.author -->
+
+    <div id='all-comment' class="message">
+      <p><%= comment.comment %></p>
+      <ul class="meta">
+        <li class="votes">24</li>
+        <li class="upvote"><a href="#"><i class="icon-thumbs-up"></i></a></li>
+        <li class="downvote"><a href="#"><i class="icon-thumbs-down"></i></a></li>
+      </ul><!-- /.meta -->
+    </div><!-- /.message -->
+
+  </div><!-- /.commentbody -->
+</li><!-- /.comment -->
