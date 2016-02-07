@@ -83,7 +83,7 @@
 
                     <% if (post.get_likes.select {|vote| vote.voter_id==current_user.id}) !=[] %>
                       <li class="likes">
-          
+
                         <%= link_to("#{post.get_likes.length}", unlike_post_path(post), remote: true) %>
                       </li>
                     <% elsif (post.get_likes.select {|vote| vote.voter_id==current_user.id})==[] %>
