@@ -4,7 +4,20 @@ class LocationsController < ApplicationController
 
   # GET /locations
   # GET /locations.json
+
   def index
+    @user = set_user
+    @location = @user.locations
+    @hash = Gmaps4rails.build_markers (@location) do |location, marker|
+      marker.lat location.latitude
+      marker.lng location.longitude
+      location.users.each do |x|
+        marker.infowindow x.name
+      end
+    end
+  end
+
+  def search
     if params[:search].present?
       @locations = Location.near(params[:search], 10, :order => 'distance')
       if @locations == []
@@ -13,9 +26,9 @@ class LocationsController < ApplicationController
         @hash = Gmaps4rails.build_markers (@locations) do |location, marker|
           marker.lat location.latitude
           marker.lng location.longitude
-           location.users.each do |x|
-             marker.infowindow x.name
-           end
+          location.users.each do |x|
+            marker.infowindow x.name
+          end
         end
       end
     end
@@ -81,7 +94,7 @@ class LocationsController < ApplicationController
   def destroy
     @location.destroy
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to locations_path, notice: 'Location was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

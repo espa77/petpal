@@ -23,10 +23,11 @@
     <%= f.label :longitude %><br>
     <%= f.text_field :longitude %>
   </div>
-  <div class="col-sm-12 ">
+  <div class="col-sm-8 col-sm-offset-1">
     <div class="actions">
-      <%= f.submit "Create New Location", class: 'btn btn-small' %>
+      <%= f.submit class: 'btn btn-small' %>
     </div>
   </div>
+  <%= link_to 'Back', location_search_path, class: 'btn btn-small' %>
 <% end %>
 </div>
