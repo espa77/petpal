@@ -1,7 +1,4 @@
-<%# if @user == current_user %>
-<p id="notice"><%= notice %></p>
-
-  <%# @user.locations.each do |x| %>
+<br>
     <p>
       <strong>Address:</strong>
       <%= @location.address %>
@@ -16,28 +13,14 @@
       <strong>Longitude:</strong>
       <%= @location.longitude %>
     </p>
-    <%# image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
-  <%# end %>
-  <br>
 
-  <div style='width: 800px;'>
-    <div id="map" style='width: 800px; height: 400px;'></div>
-  </div>
+    <%= link_to "Edit", edit_location_path(@location), class: 'btn btn-small' %>
+    <%= link_to 'Destroy', @location, class: 'btn btn-small', method: :delete, data: { confirm: 'Are you sure?' } %>
+
 
   <br>
 
-  <script type="text/javascript">
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    // debugger;
-    markers = handler.addMarkers(<%=raw @hash.to_json %>);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-    handler.getMap().setZoom(14);
-  });
-  </script>
-
-
+<%= render 'map' %>
 
 <h3>Nearby locations</h3>
 <ul>
@@ -47,7 +30,6 @@
   </ul>
 
 <p>
-  <%= link_to "Edit", edit_location_path(@location), class: 'btn btn-small' %>
-  <%= link_to "Destroy", @location, class: 'btn btn-small', :confirm => 'Are you sure?', :method => :delete %>
-  <%= link_to "View All", locations_path, class: 'btn btn-small' %>
+    <%= link_to "Back", :back, class: 'btn btn-small' %>
+    <%= link_to "Find Pals", location_search_path, class: 'btn btn-small' %>
 </p>

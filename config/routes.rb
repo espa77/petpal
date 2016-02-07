@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   get 'posts/:post_id/comment/:id/like', to: 'comments#like', :as => :like_comment
   get 'posts/:post_id/comment/:id/unlike', to: 'comments#unlike', :as => :unlike_comment
 
-
+  get 'locations/search', to: 'locations#search', :as => :location_search
+  
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session_path
     post 'login' => 'devise/sessions#create', :as => :user_session_path
