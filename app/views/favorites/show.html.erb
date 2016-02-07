@@ -33,7 +33,7 @@
       <h4><%= post.content %></h4>
     </p>
       <% if post.user_id == current_user.id %>
-        <%= link_to 'Edit Post', edit_post_path(post) %> | <%= link_to 'Delete Post', destroy_post_path(post) %><br>
+        <%= link_to 'Edit Post', edit_post_path(post), class: 'btn btn-small' %> | <%= link_to 'Delete Post', destroy_post_path(post), class: 'btn btn-small' %><br>
       <% end %>
       <h4>Comments</h4>
         <hr>
@@ -48,13 +48,8 @@
   <% end %>
 <% end %>
 
-
-
-
-
-
 <% if current_user.id == @favorite.user_id %>
-<%= link_to 'Edit', edit_favorite_path(@favorite) %> |
-<%= link_to 'Destroy', @favorite, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Edit', edit_favorite_path(@favorite), class: 'btn btn-small' %>
+<%= link_to 'Destroy', @favorite, class: 'btn btn-small', method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
-<%= link_to 'Back', favorites_path %>
+<%= link_to 'Back', favorites_path, class: 'btn btn-small' %>

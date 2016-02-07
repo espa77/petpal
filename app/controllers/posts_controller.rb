@@ -32,7 +32,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    # binding.pry
+    @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
           # @post.attachments(@post.user_id,params[:attachment]) if params[:attachment]
@@ -50,7 +50,6 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-          # @post.attachments(@post.user_id,params[:attachment]) if params[:attachment]
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -61,11 +60,9 @@ class PostsController < ApplicationController
   end
 
   def like
-    # binding.pry
     @post = Post.find(params[:id])
     @post.liked_by current_user
     respond_to do |format|
-
       format.js { }
       format.html { redirect_to @post }
     end

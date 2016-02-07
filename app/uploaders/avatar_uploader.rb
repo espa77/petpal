@@ -50,6 +50,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
     process :custom_resize => [500, 500]
   end
 
+  version :hrect_post do
+    process :custom_resize => [750, 642]
+  end
+
   version :hrect_lg do
     process :custom_resize => [800, 533]
   end

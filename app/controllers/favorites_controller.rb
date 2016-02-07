@@ -6,6 +6,9 @@ class FavoritesController < ApplicationController
   # GET /favorites.json
   def index
     @favorites = Favorite.all
+    if Favorite.all.length>0
+      @random_favorite = Favorite.all[rand(0..(Favorite.all.length-1))]
+    end
   end
 
   # GET /favorites/1
@@ -65,18 +68,21 @@ class FavoritesController < ApplicationController
   end
 
   def like
-    if @favorite.liked_by current_user
+    @favorite = Favorite.find(params[:id])
+    @favorite.liked_by current_user
       respond_to do |format|
-        format.html { redirect_to :back }
-        format.js
+        format.js { }
+        format.html { redirect_to @favorite }
       end
-    end
   end
 
   def unlike
     @favorite = Favorite.find(params[:id])
     @favorite.downvote_by current_user
-    redirect_to @favorite
+    respond_to do |format|
+      format.js { }
+      format.html { redirect_to @favorite }
+    end
   end
 
   private
