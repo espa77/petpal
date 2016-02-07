@@ -3,8 +3,6 @@
 				<div class="navbar-header">
 					<div class="container">
 
-						<a class="navbar-brand" href="index.html"><img src="assets/images/logo_dog.svg" class="logo" alt=""></a>
-            <%= link_to "PetPal", root_url, class: "navbar-brand" %>
 						<!-- ============================================================= LOGO MOBILE : END ============================================================= -->
 
 						<a class="btn responsive-menu pull-right" data-toggle="collapse" data-target=".navbar-collapse"><i class='icon-menu-1'></i></a>
@@ -15,6 +13,12 @@
 				<div class="yamm">
 					<div class="navbar-collapse collapse">
 						<div class="container">
+							<a class="navbar-brand" href="/"><img src="<%= asset_path("logo.png") %>" class="logo"></a>
+							<a class="navbar-brand" href="/"><img src="<%= asset_path("logo_dog.png") %>" class="logo"></a>
+							<a class="navbar-brand" href="/"><img src="<%= asset_path("dog-cat.png") %>" class="logo"></a>
+							<a class="navbar-brand" href="/"><img src="<%= asset_path("all_animal.png") %>" class="logo"></a>
+							<a class="navbar-brand" href="/"><img src="<%= asset_path("panda.png") %>" class="logo"></a>
+
 
 							<!-- ============================================================= MAIN NAVIGATION ============================================================= -->
 
@@ -39,8 +43,10 @@
    <% end %>
     <% end %>
 
-       </li>
-         <li>
+       				</li>
+
+
+         				<li>
                   <%= link_to('Add Friends', users_index_path) %>
                 </li><!-- /.dropdown -->
                   </ul>
