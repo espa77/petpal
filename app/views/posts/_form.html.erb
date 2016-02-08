@@ -23,9 +23,9 @@
     <div class="field">
       <%= f.hidden_field :user_id, :value => current_user.id %>
     </div>
-  <% if @favorite %>
+  <% if params[:favorite_id] %>
     <div class="field">
-      <%= f.hidden_field :favorite_id, :value => @favorite.id %>
+      <%= f.hidden_field :favorite_id, :value => params[:favorite_id].to_i %>
     </div>
   <% end %>
   <ul>
