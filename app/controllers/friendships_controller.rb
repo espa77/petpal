@@ -25,7 +25,12 @@ class FriendshipsController < ApplicationController
   def destroy
     #binding.pry
     @friendship = Friendship.all.find(params[:friendship_id])
+    @friend_id = Friendship.all.find(params[:friendship_id]).friend_id
     @friendship.destroy
+    respond_to do |format|
+      format.js { render 'friendships/destroy.js.erb'}
+      format.html { }
+    end
   end
 
 end
