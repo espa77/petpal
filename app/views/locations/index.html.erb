@@ -1,26 +1,29 @@
-<br>
-<h2>My Hangout Locations</h2>
-<br>
+<div class="container">
+  <br>
+  <h2>My Hangout Locations</h2>
+  <br>
 
-  <% @location.each do |location| %>
-    <p>
-      <strong>Address:</strong>
-      <%= location.address %>
-    </p>
+    <% @location.each do |location| %>
+      <p>
+        <strong>Address:</strong>
+        <%= location.address %>
+      </p>
 
-    <p>
-      <strong>Latitude:</strong>
-      <%= location.latitude %>
-    </p>
+      <p>
+        <strong>Latitude:</strong>
+        <%= location.latitude %>
+      </p>
 
-    <p>
-      <strong>Longitude:</strong>
-      <%= location.longitude %>
-    </p>
+      <p>
+        <strong>Longitude:</strong>
+        <%= location.longitude %>
+      </p>
 
-    <%= link_to "Edit", edit_location_path(location), class: 'btn btn-small' %>
-  <% end %>
+      <%= link_to "Edit", edit_location_path(location), class: 'btn btn-small' %>
+    <% end %>
 
-      <br>
+        <br>
 
-<%= render 'map' %>
+  <%= render 'map' %>
+
+</div>
