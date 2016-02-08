@@ -11,6 +11,7 @@
         <%= @favorite.description %>
       </p>
     </div>
+    
     <div class="col-md-7 text-center">
       <br><br>
       <h2><strong>Community Feed</strong></h2>
@@ -40,7 +41,7 @@
       <% end %>
     </div>
   </div>
-  <%= link_to("Like This!", like_favorite_path) %><br>
+  <%= link_to("Join this!", like_favorite_path) %><br>
   <% if @favorite.get_likes.size == 1 %>
     <%= "#{@favorite.get_likes.size} person likes this" %><br>
   <% else @favorite.get_likes.size > 1 %>

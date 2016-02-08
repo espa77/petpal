@@ -3813,6 +3813,7 @@ input:focus:-ms-input-placeholder {
 .classic-blog .sidemeta,
 .classic-blog .pagination {
   padding-left: 59px;
+  border-left: 1px solid #CED7E0;
   margin-left: 30px;
 }
 .classic-blog .post .date-wrapper {
