@@ -1,55 +1,66 @@
 <p id="notice"><%= notice %></p>
+<main>
 
-<p class="favorite_community_photo">
-  <td><%= image_tag @favorite.attachment.url(:hrect_sm) || 'pet_community_photo.png', class: 'attachment' %></td>
-</p>
-
-<h1><%= @favorite.title %></h1>
-
-<p>
-  <%= @favorite.description %>
-</p>
-
-<%= link_to("Like This!", like_favorite_path) %><br>
-<% if @favorite.get_likes.size == 1 %>
-  <%= "#{@favorite.get_likes.size} person likes this" %><br>
-<% else @favorite.get_likes.size > 1 %>
-  <%= "#{@favorite.get_likes.size} people like this" %><br>
-<% end %>
-<%= link_to("Disike This!", unlike_favorite_path) %><br>
-
-<% if current_user.voted_up_on? @favorite %>
-  <%= render '/posts/form'  %>
-<% end %>
-
-<h4><strong>Community Feed</strong></h4>
-<% Post.all.each do |post| %>
-  <% if post.favorite_id == @favorite.id %>
-    <% if post.attachment == nil %>
-      <%= post.content %>
-    <% else %>
-    <p>
-      <%= post.attachment %>
-      <h4><%= post.content %></h4>
-    </p>
-      <% if post.user_id == current_user.id %>
-        <%= link_to 'Edit Post', edit_post_path(post), class: 'btn btn-small' %> | <%= link_to 'Delete Post', destroy_post_path(post), class: 'btn btn-small' %><br>
+<div id="favorite-show-container" class="container">
+  <div class="row">
+    <div id="fav-prof-pic" class="col-md-5 text-center">
+      <%= image_tag @favorite.attachment.url(:hrect_sm) || 'pet_community_photo.png', class: 'attachment' %>
+      <br><br>
+      <h1><%= @favorite.title %></h1>
+      <p>
+        <%= @favorite.description %>
+      </p>
+    </div>
+    <div class="col-md-7 text-center">
+      <br><br>
+      <h2><strong>Community Feed</strong></h2>
+      <% Post.all.each do |post| %>
+        <% if post.favorite_id == @favorite.id %>
+          <% if post.attachment == nil %>
+            <%= post.content %>
+          <% else %>
+          <p>
+            <%= post.attachment %>
+            <h4><%= post.content %></h4>
+          </p>
+            <% if post.user_id == current_user.id %>
+              <%= link_to 'Edit Post', edit_post_path(post), class: 'btn btn-small' %> | <%= link_to 'Delete Post', destroy_post_path(post), class: 'btn btn-small' %><br>
+            <% end %>
+            <h4>Comments</h4>
+              <hr>
+                <%= render 'comments/form', commentable: post %>
+              <br>
+              <div class="comments">
+                <ul>
+                  <%= render post.comments %>
+                </ul>
+              </div>
+          <% end %>
+        <% end %>
       <% end %>
-      <h4>Comments</h4>
-        <hr>
-          <%= render 'comments/form', commentable: post %>
-        <br>
-        <div class="comments">
-          <ul>
-            <%= render post.comments %>
-          </ul>
-        </div>
-    <% end %>
+    </div>
+  </div>
+  <%= link_to("Like This!", like_favorite_path) %><br>
+  <% if @favorite.get_likes.size == 1 %>
+    <%= "#{@favorite.get_likes.size} person likes this" %><br>
+  <% else @favorite.get_likes.size > 1 %>
+    <%= "#{@favorite.get_likes.size} people like this" %><br>
   <% end %>
-<% end %>
+  <%= link_to("Disike This!", unlike_favorite_path) %><br>
 
-<% if current_user.id == @favorite.user_id %>
-<%= link_to 'Edit', edit_favorite_path(@favorite), class: 'btn btn-small' %>
-<%= link_to 'Destroy', @favorite, class: 'btn btn-small', method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
-<%= link_to 'Back', favorites_path, class: 'btn btn-small' %>
+  <% if current_user.voted_up_on? @favorite %>
+    <%= render '/posts/form'  %>
+  <% end %>
+
+
+  <% if current_user.id == @favorite.user_id %>
+  <%= link_to 'Edit', edit_favorite_path(@favorite), class: 'btn btn-small' %>
+  <%= link_to 'Destroy', @favorite, class: 'btn btn-small', method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+  <%= link_to 'Back', favorites_path, class: 'btn btn-small' %>
+</div>
+
+
+
+
+</main>
