@@ -25,7 +25,7 @@
                       </h3>
                     </figcaption>
                     <% if current_user.my_friends.include?(user) %>
-                     <%= link_to 'Unfriend', unfriend_path(:id => current_user.id, :friendship_id => current_user.find_friendship(current_user, user).id), remote: true, class: "btn btn-medium" %>
+                     <%= link_to 'Unfriend', unfriend_path(:id => current_user.id, :friendship_id => current_user.find_friendship(current_user, user).id), remote: true, id:"friend-#{user.id}", class: "btn btn-medium" %>
                      <% elsif Request.find_by(:user_id => current_user.id, :friend_id => user.id) %>
                        <% @request = Request.find_by(:user_id => current_user.id, :friend_id => user.id) %>
                        <%= link_to("Cancel Request", "/requests/#{@request.id}/destroy", remote: true, class: "btn btn-medium", id: "friend-#{user.id}") %>
