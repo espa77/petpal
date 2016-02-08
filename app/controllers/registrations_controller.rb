@@ -8,6 +8,16 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def destroy
+    @user.posts.each do |x|
+      x.destroy
+    end
+    @user.favorites.each do |x|
+      x.destroy
+    end
+    super
+  end
+
   protected
 
   def configure_permitted_parameters
