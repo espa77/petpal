@@ -320,7 +320,7 @@ main header + * {
 .inner-md {
   padding-top: 100px;
   padding-bottom: 100px;
-} 
+}
 .inner-sm {
   padding-top: 80px;
   padding-bottom: 80px;
@@ -3908,7 +3908,7 @@ input:focus:-ms-input-placeholder {
     border: 1px solid #1ABB9C;
     border-radius: 50%;
 }
-.sidemeta .format-wrapper a:hover {
+.sidemeta .format-wrapper  {
   background: #1ABB9C;
   color: #FFF;
 }

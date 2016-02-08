@@ -67,7 +67,7 @@
                     </div><!-- /.date -->
                   </div><!-- /.date-wrapper -->
                   <div class="format-wrapper">
-                    <a href="#" data-filter=".format-image"><i class="round-image-50"><%= image_tag(User.find(post.user_id).avatar.url(:thumb)) %></i></a>
+                    <%= image_tag(User.find(post.user_id).avatar.url(:thumb), class: "round-image-50" )%></i></a>
                   </div><!-- /.format-wrapper -->
                   <div class="post-content">
                     <figure class="icn-link post-media">
