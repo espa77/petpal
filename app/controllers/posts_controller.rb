@@ -32,6 +32,9 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+      if params[:favorite_id]
+      @post.favorite_id = params[:favorite_id]
+    end
     @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
