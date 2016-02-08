@@ -21,9 +21,11 @@
                           <span class="month">May</span>
                         </div><!-- /.date -->
                       </div><!-- /.date-wrapper -->
-                      <div class="format-wrapper">
-                        <a href="#" data-filter=".format-image"><i class="icon-picture-1"></i></a>
-                      </div><!-- /.format-wrapper -->
+
+											<div class="format-wrapper">
+		                    <a href="#" data-filter=".format-image"><i class="round-image-50"><%= image_tag(User.find(post.user_id).avatar.url(:thumb)) %></i></a>
+		                  </div><!-- /.format-wrapper -->
+
                       <div class="post-content">
                         <figure class="icon-overlay icn-link post-media">
                           <%= image_tag @post.attachment.url(:small) %>

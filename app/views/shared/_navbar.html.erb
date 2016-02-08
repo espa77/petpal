@@ -13,10 +13,7 @@
 				<div class="yamm">
 					<div class="navbar-collapse collapse">
 						<div class="container">
-							<a class="navbar-brand" href="/"><img src="<%= asset_path("logo.png") %>" class="logo"></a>
-							<a class="navbar-brand" href="/"><img src="<%= asset_path("logo_dog.png") %>" class="logo"></a>
-							<a class="navbar-brand" href="/"><img src="<%= asset_path("dog-cat.png") %>" class="logo"></a>
-							<a class="navbar-brand" href="/"><img src="<%= asset_path("all_animal.png") %>" class="logo"></a>
+
 							<a class="navbar-brand" href="/"><img src="<%= asset_path("panda.png") %>" class="logo"></a>
 
 
@@ -78,7 +75,7 @@
                 <li>
 									<%= link_to('Sign Out', destroy_user_session_path) %>
 								</li><!-- /.dropdown -->
-                <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
+                <li><%= image_tag(current_user.avatar.url(:thumb),  class: "round-image-50") %></li>
 
               <% else %>
               <li>
