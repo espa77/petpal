@@ -1,4 +1,4 @@
-
+ 
 
 
 
@@ -9,7 +9,7 @@
               <div class="row thumbs gap-md text-center">
                 <% @users.each do |user|  %>
                 <div class="col-sm-2 thumb">
-                  <figure class="member">
+                  <figure id='user-<%=user.id %>' class="member">
                     
                     <div class="member-image">
                       
@@ -25,17 +25,15 @@
                       </h3>
                     </figcaption>
                     <% if current_user.my_friends.include?(user) %>
-                     <%= link_to 'Unfriend', unfriend_path(:id => current_user.id, :friendship_id => current_user.find_friendship(current_user, user).id), class: "btn btn-medium" %>
+                     <%= link_to 'Unfriend', unfriend_path(:id => current_user.id, :friendship_id => current_user.find_friendship(current_user, user).id), remote: true, class: "btn btn-medium" %>
+                     <% elsif Request.find_by(:user_id => current_user.id, :friend_id => user.id) %>
+                       <% @request = Request.find_by(:user_id => current_user.id, :friend_id => user.id) %>
+                       <%= link_to("Cancel Request", "/requests/#{@request.id}/destroy", remote: true, class: "btn btn-medium", id: "friend-#{user.id}") %>
                     <% else %>
-                        <%= form_for :friendship, url: requests_path do |f| %>
-                          <%= f.hidden_field :friend_id, :value => user.id %>
-                          <%= f.hidden_field :user_id, :value => current_user.id %>
-                          <%= f.submit "Add Friend", class: "btn btn-medium" %> <br>
+                      <%= link_to("Add Friend", requests_path(:friend_id => user.id, :user_id => current_user.id), method: "post", remote: true, class: "btn btn-medium", id: "friend-#{user.id}") %>
                     <% end %>
-                      <% end %>
                   </figure>
                 </div><!-- /.col -->
                  <% end %>
               </row>
-              
             </section>

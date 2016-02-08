@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'friendships/:id/destroy', to: 'friendships#destroy', :as => :unfriend
   post 'add_friend', to: 'friendships#create', :as => :add_friend
+  get 'requests/:id/destroy', to: 'requests#destroy', :as => :cancel_request
+  post 'requests/:id/destroy', to: 'requests#destroy'
   #creating this route was necessary for getting the correct commentable id
   #along with the id of the comment. There is likely a better way.
   get 'posts/:post_id/comment/:id/like', to: 'comments#like', :as => :like_comment
@@ -42,7 +44,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:create, :destroy]
   resources :favorites
   resources :friendships, except: [:destroy]
-  resources :requests, only: [:create, :destroy]
+  resources :requests, only: [:create]
   # devise_for :users
 
   # devise_for :users, path: "", controllers: { sessions: "sessions", registrations: "registrations" }, path_names: { sign_in: 'login', password: 'forgot', confirmation: 'confirm', unlock: 'unblock', sign_up: 'register', sign_out: 'signout'}

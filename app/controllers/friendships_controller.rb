@@ -1,5 +1,5 @@
 class FriendshipsController < ApplicationController
-
+ 
   def create
     if current_user.id == params[:friendship][:friend_id].to_i
       flash[:notice] = 'Cannot add yourself.'
@@ -26,9 +26,6 @@ class FriendshipsController < ApplicationController
     #binding.pry
     @friendship = Friendship.all.find(params[:friendship_id])
     @friendship.destroy
-    flash[:notice] = "Removed friendship."
-    #binding.pry
-    redirect_to users_index_path
   end
 
 end

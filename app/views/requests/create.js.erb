@@ -1,0 +1,5 @@
+$('#friend-<%=params[:friend_id]%>').attr("href", "/requests/<%= @request.id%>/destroy").text("Cancel Request");
+$('#friend-<%=params[:friend_id]%>').attr("data-method", "get"); 
+$('#friend-<%=params[:friend_id]%>').attr("id", "friend-<%=params[:friend_id]%>");
+$('#friend-<%=params[:friend_id]%>').attr("data-remote", "true"); 
+
