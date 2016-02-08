@@ -1,7 +1,7 @@
-   <section id="hero">
+<section id="hero">
     <div class="height-lg">
       <div class = "panel">
-     <div class="item stretch" style="background-image: url( <%= asset_path('hero_forest.jpg')%>);">
+     <div class="item stretch" style="background-image: url( <%= asset_path('forest-04.jpg')%>);">
               <div class="container">
                 <div class="caption vertical-center text-center">
                   <div class="container">
@@ -15,15 +15,13 @@
                     <h1 class="fadeInDown-1 light-color"><%= @user.name %></h1>
                       <p class="fadeInDown-2 medium-color"></p>
                     </div>
-
                 </div><!-- /.caption -->
               </div><!-- /.container -->
             </div><!-- /.item -->
           </div>
   </div>
   </section>
-
-
+<br><br>
         <section id="who-we-are">
         <div class = "remove-whitespace">
           <div class="container inner-bottom-sm">
@@ -35,65 +33,46 @@
                 </header>
               </div><!-- /.col -->
             </div><!-- /.row -->
-
             <div class="row inner-top-sm">
-
               <div class="col-md-1">
                 <div class="icon pull-right">
                       <i> <%= image_tag('pawprint.png', class: "little-icon") %></i>
                 </div><!-- /.icon -->
               </div><!-- /.col -->
-
               <div class="col-md-3 inner-bottom-xs">
                 <h2>Species</h2>
                 <p class="text-small"><%= @user.species %></p>
               </div><!-- /.col -->
-
               <div class="col-md-1">
                 <div class="icon pull-right">
                       <i> <%= image_tag('pawprint.png', class: "little-icon") %></i>
                 </div><!-- /.icon -->
               </div><!-- /.col -->
-
               <div class="col-md-3 inner-bottom-xs">
                 <h2>Gender</h2>
                 <p class="text-small"><%= @user.gender %></p>
               </div><!-- /.col -->
-
               <div class="col-md-1">
                 <div class="icon pull-right">
                   <i> <%= image_tag('pawprint.png', class: "little-icon") %></i>
                 </div><!-- /.icon -->
               </div><!-- /.col -->
-
               <div class="col-md-3 inner-bottom-xs">
                 <h2>Birthday</h2>
                 <p class="text-small"><%= @user.birthday %></p>
               </div><!-- /.col -->
-
             </div><!-- /.row -->
           </div>
-
         </section>
-
-
     <section id="team" class="light-bg inner-xs inner-left-xs inner-right-xs">
-
                 <h3 class="team-headline sidelines text-center"><span><strong>My Friends</strong></span></h3>
-
                 <div class="row thumbs gap-md text-center">
                   <% current_user.my_friends.each do |friend|  %>
-
                   <div class="col-sm-2 thumb">
                     <figure class="member">
-
                       <div class="member-image">
                       <div class= "friend-fit">
-
-                        <%= image_tag (friend.avatar.url(:medium)) %>
-
-
-
+                        <a href="/users/<%=friend.id%>/profile_page"><%= image_tag (friend.avatar.url(:medium)) %></a>
                         </div>
                             <figcaption class="member-details bordered no-top-border">
                         <h3>
@@ -101,24 +80,18 @@
                         </h3>
                       </figcaption>
                       </div><!-- /.member-image -->
-
                     </figure>
                   </div><!-- /.col -->
                    <% end %>
                 </row>
-
               </section>
-
 <section>
   <div class="spacebar light-bg">
   </div>
 </section>
-
  <%if current_user.my_friends.include?(@user) || @user == current_user %>
-
   <section id="latest-works" class="light-bg">
         <div class="container inner">
-
           <div class="row">
             <div class="team-headline center-block sidelines text-center">
               <header>
@@ -126,66 +99,42 @@
               </header>
             </div><!-- /.col -->
           </div><!-- /.row -->
-
           <div class="row inner-top-sm">
             <div id="owl-latest-works" class="owl-carousel owl-item-gap">
               <% @user.display_photos.each do |photo| %>
               <div class="item">
                   <figure>
-                   <%= link_to((image_tag photo.attachment), "/posts/#{photo.id}")%>
                     <figcaption class="text-overlay">
                       <div class="info">
-                        <h4><%= photo.content %></h4>
+                        <a href="/posts/<%=photo.id%>"><h4><%= photo.content %></h4></a>
                       </div><!-- /.info -->
                     </figcaption>
+                    <a href="/posts/<%=photo.id%>"><%= image_tag photo.attachment %></a>
                   </figure>
                 </a>
               </div><!-- /.item -->
               <% end %>
-
             </div><!-- /.owl-carousel -->
           </div><!-- /.row -->
-
         </div><!-- /.container -->
       </section>
-
-
-
-
         <div class="row pricing">
-
-
             <div class="col-md-12 col-sm-8 inner-top-sm center">
               <div class="plan">
-
                 <header>
                   <h2>My Hangout</h2>
-
                 <% if @user.locations == [] %>
-
                 <%= link_to 'Create new Hangout location', new_location_path, class: "btn" %>
-
                 <% else %>
                     <div id="map" class="center" style='width: 500px; height: 400px; margin: 0 auto;'></div>
                 <% end %>
-
-
                 </header>
-
                 <ul class="features">
                   <li><i class="icon-window"></i> </li>
                 </ul><!-- /.features -->
-
               </div><!-- /.plan -->
             </div><!-- /.col -->
-
-
       <br>
-
-
-
-
-
     <% Request.all.each do |request| %>
    <% if request.friend_id == current_user.id %>
     <h2>Friend Requests</h2>
@@ -203,7 +152,6 @@
  <% end %>
       <%= link_to('Edit Profile', edit_user_registration_path, class: "col-sm-offset-1 btn btn-small" )%>
   <% end %>
-
   <script type="text/javascript">
      handler = Gmaps.build('Google');
      handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
