@@ -38,9 +38,13 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
-          # @post.attachments(@post.user_id,params[:attachment]) if params[:attachment]
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+        if @post.favorite_id != nil
+          format.html { redirect_to "/favorites/#{@post.favorite_id}", notice: 'Post was successfully created.' }
+        else
+            # @post.attachments(@post.user_id,params[:attachment]) if params[:attachment]
+          format.html { redirect_to @post, notice: 'Post was successfully created.' }
+          format.json { render :show, status: :created, location: @post }
+        end
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }

@@ -3,19 +3,16 @@
 
   <div class="row">
     <div id="fav-prof-pic" class="col-md-5 text-center">
+      <br>
       <%= image_tag @favorite.attachment.url(:hrect_sm) || 'pet_community_photo.png', class: 'attachment' %>
       <br><br>
       <h1><%= @favorite.title %></h1>
       <p>
         <%= @favorite.description %>
       </p>
-      <%= link_to("Join this!", like_favorite_path) %><br>
-      <% if @favorite.get_likes.size == 1 %>
-        <%= "#{@favorite.get_likes.size} person likes this" %><br>
-      <% else @favorite.get_likes.size > 1 %>
-        <%= "#{@favorite.get_likes.size} people like this" %><br>
-      <% end %>
-      <%= link_to("Disike This!", unlike_favorite_path) %><br>
+      <%= link_to("Join this community?!", like_favorite_path) %><br>
+        <%= "#{@favorite.get_likes.size} people are part of this community" %><br>
+      <%= link_to("Leave Group!", unlike_favorite_path) %><br>
 
     </ul>
 
@@ -27,18 +24,109 @@
       <%= link_to 'Back', favorites_path, class: 'btn btn-small' %>
     </div>
 
-    <div class="col-md-7 text-center">
+    <div id='favorite-community-border' class="col-md-7">
       <br><br>
-      <h2><strong>Community Feed</strong></h2>
-      <% if current_user.voted_up_on? @favorite %>
-      <%= link_to("Create a new post!", new_favorite_post_path(@favorite.id), class: "btn") %>
-      <% end %>
-      <% if @favorite.posts.length==0 %>
-      <h4>There are no posts on this favorite, why not start this whole thing? </h4>
+      <div class="text-center">
+        <h2><strong>Community Feed</strong></h2>
+        <% if current_user.voted_up_on? @favorite %>
+        <%= link_to("Create a new post!", new_favorite_post_path(@favorite.id), class: "btn") %><br><br>
+        <% end %>
+        <% if @favorite.posts.length==0 %>
+        <h4>There are no posts on this community's forum, why not start this whole thing? </h4><br>
+      </div>
       <% else %>
-      <% @favorite.posts.reverse.each do |post| %>
-      <%= post.content %>
-      <% end %>
+
+          <% @favorite.posts.reverse.each do |post|  %>
+
+          <% if post.attachment %>
+          <div id="yehuda-dream" class="post format-image">
+            <div class="date-wrapper">
+              <div class="date">
+                <span class="Date"><%= post.created_at.to_s.split[0] %></span>
+              </div><!-- /.date -->
+            </div><!-- /.date-wrapper -->
+          <div class="format-wrapper">
+              <%= image_tag(User.find(post.user_id).avatar.url(:thumb), class: "round-image-50" )%></i></a>
+          </div><!-- /.format-wrapper -->
+            <div class="post-content">
+              <figure  class="icn-link post-media">
+                <a href="/posts/<%=post.id%>"><%= image_tag post.attachment.url(:hrect_sm),id: "fiddlesticks"  %></a>
+              </figure><!-- /.post-media -->
+
+              <ul class="meta">
+                  <li class="categories"><a href="/users/<%=post.user.id%>"><%= post.user.name %></a></li>
+                  <li class="comments"><a href="/posts/<%=post.id%>"><%= post.comments.length %></a></li>
+                    <% if (post.get_likes.select {|vote| vote.voter_id==current_user.id}) !=[] %>
+                      <li class="likes">
+                        <%= link_to("#{post.get_likes.length}", unlike_post_path(post), remote: true) %>
+                      </li>
+                    <% elsif (post.get_likes.select {|vote| vote.voter_id==current_user.id})==[] %>
+                      <li class="likes">
+                          <%= link_to("#{post.get_likes.length}", like_post_path(post), remote: true) %>
+                      </li>
+                    <% end %>
+              </ul><!-- /.meta -->
+
+
+              <div class="post-info">
+              <p><%=post.content %></p>
+            </div>
+              <!-- button stuff -->
+              <ul>
+                <a href="/posts/<%=post.id%>" class="btn">Show Post</a>
+              <% if current_user.id == post.user_id %>
+                <a href="/posts/<%=post.id%>/edit" class="btn">Edit Post</a>
+                <a href="posts/<%=post.id%>/destroy" class="btn">Delete Post</a>
+              <% end %>
+              </ul>
+
+            </div><!-- /.post-content -->
+          </div><!-- /.post -->
+
+          <!-- without attachment               -->
+          <% elsif !post.attachment%>
+
+          <div class="post format-standard">
+
+            <div class="date-wrapper">
+              <div class="date">
+                <span class="Date"><%= post.created_at.to_s.split[0] %></span>
+              </div><!-- /.date -->
+            </div><!-- /.date-wrapper -->
+
+            <div class="format-wrapper">
+              <a href="#" data-filter=".format-image"><i class="round-image-50"><%= image_tag(User.find(post.user_id).avatar.url(:thumb)) %></i></a>
+            </div><!-- /.format-wrapper -->
+
+            <div class="post-content">
+
+              <h2 class="post-title">
+                <a href="blog-post.html"> <%= User.find(post.user_id).name %> </a>
+              </h2>
+
+              <ul class="meta">
+                <li class="categories"><a href="/posts/<%=post.id%>">Written Post</a></li>
+                <li class="comments"><a href="/posts/<%=post.id%>"><%= post.comments.length %></a></li>
+                <li class="likes"><a href="/posts/<%=post.id%>"> <%= post.get_likes.size %></a></li>
+              </ul><!-- /.meta -->
+
+              <p><%=post.content %></p>
+
+              <ul>
+                <a href="/posts/<%=post.id%>" class="btn">Show Post</a>
+              <% if current_user.id == post.user_id %>
+                <a href="/posts/<%=post.id%>/edit" class="btn">Edit Post</a>
+                <a href="posts/<%=post.id%>/destroy" class="btn">Delete Post</a>
+              <% end %>
+              </ul>
+
+            </div><!-- /.post-content -->
+
+          </div><!-- /.post -->
+          <% end  %>
+          <% end %>
+
+
       <% end %>
     </div>
   </div>

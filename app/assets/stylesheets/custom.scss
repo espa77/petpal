@@ -11,6 +11,29 @@
     img { width: 160%; }
 }
 
+#yehuda-dream{
+    position: relative;
+  background: #FFF;
+    padding-bottom: 60px;
+  border: 1px solid #E6E9ED;
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  margin: 30px;
+}
+
 #favorite-show-container {
   background-color: rgb(242, 245, 247);
+}
+#fiddlesticks {
+    max-width: 70%;
+    height: auto;
+}
+#favorite-community-border {
+  background-color: rgb(242, 245, 247);
+  border-left: 1px solid #CED7E0;
+}
+
+.post-info {
+  border-left: 1px solid rgb(26,187,157);
+  border-right: 1px solid rgb(26,187,157);
 }
