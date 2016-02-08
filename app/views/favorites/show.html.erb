@@ -17,9 +17,7 @@
       <% end %>
       <%= link_to("Disike This!", unlike_favorite_path) %><br>
 
-      <% if current_user.voted_up_on? @favorite %>
-        <%= render '/posts/form'  %>
-      <% end %>
+    </ul>
 
 
       <% if current_user.id == @favorite.user_id %>
@@ -32,8 +30,15 @@
     <div class="col-md-7 text-center">
       <br><br>
       <h2><strong>Community Feed</strong></h2>
+      <% if current_user.voted_up_on? @favorite %>
+      <%= link_to("Create a new post!", new_favorite_post_path(@favorite.id), class: "btn") %>
+      <% end %>
+      <% if @favorite.posts.length==0 %>
+      <h4>There are no posts on this favorite, why not start this whole thing? </h4>
+      <% else %>
       <% @favorite.posts.reverse.each do |post| %>
-
+      <%= post.content %>
+      <% end %>
       <% end %>
     </div>
   </div>

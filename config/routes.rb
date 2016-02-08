@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'home#front'
   get 'posts/:id/destroy', to: 'posts#destroy', :as => :destroy_post
   # post 'users/:id/profile_page', to: 'users#upload'
-
+  get '/favorites/:favorite_id/posts/new', to: 'posts#new', :as => :new_favorite_post
   get 'friendships/:id/destroy', to: 'friendships#destroy', :as => :unfriend
   post 'add_friend', to: 'friendships#create', :as => :add_friend
   #creating this route was necessary for getting the correct commentable id
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'posts/:post_id/comment/:id/unlike', to: 'comments#unlike', :as => :unlike_comment
 
   get 'locations/search', to: 'locations#search', :as => :location_search
-  
+
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session_path
     post 'login' => 'devise/sessions#create', :as => :user_session_path

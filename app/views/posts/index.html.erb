@@ -31,7 +31,8 @@
 
 <!-- with image attachment -->
                 <% @posts.reverse.each do |post|  %>
-                <% if post.attachment %>
+
+                <% if post.attachment && post.favorite_id==nil %>
                 <div class="post format-image">
                   <div class="date-wrapper">
                     <div class="date">
@@ -79,7 +80,7 @@
                   </div><!-- /.post-content -->
                 </div><!-- /.post -->
   <!-- without attachment               -->
-                <% elsif !post.attachment %>
+                <% elsif !post.attachment && post.favorite_id==nil %>
 
                 <div class="post format-standard">
 
