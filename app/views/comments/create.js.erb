@@ -1,14 +1,14 @@
-var comment_placement = $('#comments h2').first();
-$("<%=j render(@comment) %>").insertAfter(comment_placement);
-$('#comment_text').closest('form').find("input[type=text], textarea").val("");
-if (<%= @commentable.comments.length %> > 1) {
-  $('#comments h2').first().text("<%= @commentable.comments.length %> Comments");
-  $('.comments a').text("<%= @commentable.comments.length %> Comments");
-  }
-else if (<%= @commentable.comments.length %> === 1) {
-  $('#comments h2').first().text("<%= @commentable.comments.length %> Comment");
-  $('.comments a').text("<%= @commentable.comments.length %> Comment");
- } else {
-   $('#comments h2').first().text("No comments yet, but you can be first!");
-   $('.comments a').text("No Comments");
- };
+ var comment_placement = $('#comments h2').first();
+ $("<%=j render(@comment) %>").insertAfter(comment_placement);
+ $('#comment_text').closest('form').find("input[type=text], textarea").val("");
+ if (<%= @commentable.comments.length %> > 1) {
+   $('#comments h2').first().text("<%= @commentable.comments.length %> Comments");
+   $('.comments a').text("<%= @commentable.comments.length %> Comments");
+   }
+ else if (<%= @commentable.comments.length %> === 1) {
+   $('#comments h2').first().text("<%= @commentable.comments.length %> Comment");
+   $('.comments a').text("<%= @commentable.comments.length %> Comment");
+  } else {
+    $('#comments h2').first().text("No comments yet, but you can be first!");
+    $('.comments a').text("No Comments");
+  };

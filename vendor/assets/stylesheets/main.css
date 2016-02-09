@@ -4311,6 +4311,7 @@ input:focus:-ms-input-placeholder {
 #comments .commentbody {
   padding-left: 3px;
     overflow: hidden;
+    border-bottom: 1px solid #CED7E0;
 }
 #comments .author {
     margin-bottom: 15px;

@@ -48,30 +48,36 @@
                       <a href="/posts/<%=post.id%>"><%= image_tag post.attachment.url(:hrect_md) %></a>
                     </figure><!-- /.post-media -->
 
-                    <ul class="meta">
-                      <li class="categories"><a href="/posts/<%=post.id%>">Photography</a></li>
-                      <% if post.comments.length > 1 %>
-                        <li class="comments"><a href="/posts/<%=post.id%>"><%= post.comments.length %> Comments</a></li>
-                      <% elsif post.comments.length == 1 %>
-                        <li class="comments"><a href="/posts/<%=post.id%>"><%= post.comments.length %> Comment</a></li>
-                      <% else %>
-                        <li class="comments"><a href="/posts/<%=post.id%>">No Comments</a></li>
-                      <% end %>
-
-                    <% if (post.get_likes.select {|vote| vote.voter_id==current_user.id}) !=[] %>
-                      <li class="likes">
-
-                        <%= link_to("#{post.get_likes.length}", unlike_post_path(post), remote: true) %>
-                      </li>
-                    <% elsif (post.get_likes.select {|vote| vote.voter_id==current_user.id})==[] %>
-                      <li class="likes">
-                          <%= link_to("#{post.get_likes.length}", like_post_path(post), remote: true) %>
-                      </li>
-                    <% end %>
-                    </ul><!-- /.meta -->
+<div id="superman" class="text-center" style="top: -; bottom: 40px; margin-bottom: -;
+margin-bottom: 0px; margin-top: -;margin-top: 0px;">
+  <ul class="meta">
 
 
-                    <p><%=post.content %></p>
+    <li class="categories"><a href="/users/<%=post.user_id%>"><%= post.user.name %></a></li>
+    <% if post.comments.length > 1 %>
+    <li class="comments"><a href="/posts/<%=post.id%>"><%= post.comments.length %> Comments</a></li>
+    <% elsif post.comments.length == 1 %>
+    <li class="comments"><a href="/posts/<%=post.id%>"><%= post.comments.length %> Comment</a></li>
+    <% else %>
+    <li class="comments"><a href="/posts/<%=post.id%>">No Comments</a></li>
+    <% end %>
+
+    <% if (post.get_likes.select {|vote| vote.voter_id==current_user.id}) !=[] %>
+    <li class="likes">
+
+      <%= link_to("#{post.get_likes.length}", unlike_post_path(post), remote: true) %>
+    </li>
+    <% elsif (post.get_likes.select {|vote| vote.voter_id==current_user.id})==[] %>
+    <li class="likes">
+      <%= link_to("#{post.get_likes.length}", like_post_path(post), remote: true) %>
+    </li>
+    <% end %>
+  </ul><!-- /.meta -->
+
+</div>
+
+
+                    <p style="margin-top: -;"><%=post.content %></p>
                     <!-- button stuff -->
                     <ul>
                       <a href="/posts/<%=post.id%>" class="btn">Show Post</a>
