@@ -11,7 +11,8 @@
       <!-- ============================================================= SECTION – POPULAR POSTS : END ============================================================= -->
       <!-- ============================================================= SECTION – BLOG ============================================================= -->
       <section id="blog" class="light-bg">
-        <div class="container inner-top-sm inner-bottom classic-blog no-sidebar">
+        <div class="container inner-bottom classic-blog no-sidebar">
+          <br><br>
           <ul class="text-center">
             <% if @posts.length==0 %>
             <h4>There are no posts on your feed, why not start this whole thing? </h4>
@@ -20,7 +21,7 @@
           </ul>
           <div class="row inner-bottom-xs">
             <div class="col-sm-12">
-                <ul class="filter text-center">
+                <ul class="filter text-center" style="margin-bottom: 0px">
                   <li><a href="#" data-filter=".photography">Photography</a></li>
                 </ul><!-- /.filter -->
             </div><!-- /.col -->
@@ -139,6 +140,7 @@
               </div><!-- /.widget -->
               </aside>
         </div>  <!--  row -->
+      </div>
       <!-- ============================================================= SECTION – BLOG : END ============================================================= -->
     </main>
 
