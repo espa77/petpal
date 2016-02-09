@@ -1,3 +1,4 @@
+<br>
 <li class="comment-<%=comment.id%>">
   <div class="avatar icon-overlay icn-link">
     <a href="/users/<%= comment.user.id%>"><%= image_tag(User.find(comment.user.id).avatar.url(:thumb)) %></a>
@@ -15,25 +16,27 @@
     <div id='all-comment' class="message">
       <p><%= comment.comment %></p>
     <div class="row">
-      <ul class="meta">
-          <% if (comment.get_likes.select {|vote| vote.voter_id==current_user.id}) !=[] %>
-            <li>
-              <%= link_to("#{comment.get_likes.length} Likes", "/posts/#{comment.commentable_id}/comments/#{comment.id}/unlike", remote: true, class: "like-#{comment.id} gray-text btn btn-sm") %>
-            </li>
-          <% elsif (comment.get_likes.select {|vote| vote.voter_id==current_user.id})==[] %>
-            <li>
-              <%= link_to("#{comment.get_likes.length} Likes", "/posts/#{comment.commentable_id}/comments/#{comment.id}/like", remote: true, class: "like-#{comment.id} gray-text btn btn-sm") %>
-            </li>
-          <% end %>
-                 <div class="col-md-2 col-md-offset-9">
-                  <% if comment.user.id == current_user.id %>
-                    <%= link_to("Delete", destroy_comment_path(comment.id), remote: true, class: "btn btn-sm") %> 
-                  <% end %>
-                </div>
-              
-      </ul><!-- /.meta -->
+      <div class="col-md-2">
+        <ul class="meta">
+            <% if (comment.get_likes.select {|vote| vote.voter_id==current_user.id}) !=[] %>
+              <li>
+                <%= link_to("#{comment.get_likes.length} Likes", "/posts/#{comment.commentable_id}/comments/#{comment.id}/unlike", remote: true, class: "like-#{comment.id} gray-text") %>
+              </li>
+            <% elsif (comment.get_likes.select {|vote| vote.voter_id==current_user.id})==[] %>
+              <li>
+                <%= link_to("#{comment.get_likes.length} Likes", "/posts/#{comment.commentable_id}/comments/#{comment.id}/like", remote: true, class: "like-#{comment.id} gray-text") %>
+              </li>
+            <% end %>
+                
+        </ul><!-- /.meta -->
+        </div>
+         <div class="col-md-2 col-md-offset-7">
+            <% if comment.user.id == current_user.id %>
+                  <%= link_to("Delete", destroy_comment_path(comment.id), remote: true, class: "btn btn-sm") %> 
+            <% end %>
+        </div>
       </div>
     </div><!-- /.message -->
-
+    <br>
   </div><!-- /.commentbody -->
 </li><!-- /.comment -->
