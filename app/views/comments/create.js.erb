@@ -1,6 +1,8 @@
  var comment_placement = $('#comments h2').first();
  $("<%=j render(@comment) %>").insertAfter(comment_placement);
  $('#comment_text').closest('form').find("input[type=text], textarea").val("");
+ $('#animator-<%=@comment.id%>').addClass('animated fadeInUp');
+ $('#column-<%=@comment.id%>').addClass('animated fadeInUp');
  if (<%= @commentable.comments.length %> > 1) {
    $('#comments h2').first().text("<%= @commentable.comments.length %> Comments");
    $('.comments a').text("<%= @commentable.comments.length %> Comments");
