@@ -43,8 +43,13 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = current_user.comments.find(params[:id])
+    @commentable = @comment.commentable_type.constantize.find(@comment.commentable_id)
     @comment_id = params[:id]
     @comment.destroy
+      respond_to do |format|
+        format.js { render 'comments/destroy.js.erb'}
+        format.html {redirect_to root_path}
+    end
   end
 
   def update

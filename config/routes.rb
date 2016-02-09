@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get 'locations/search', to: 'locations#search', :as => :location_search
 
+  get 'comments/:id/destroy', to: 'comments#destroy', :as => :destroy_comment
+
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session_path
     post 'login' => 'devise/sessions#create', :as => :user_session_path
@@ -41,7 +43,7 @@ Rails.application.routes.draw do
 
   resources :locations
   resources :uploads
-  resources :comments, only: [:create, :destroy]
+  resources :comments, only: [:create]
   resources :favorites
   resources :friendships, except: [:destroy]
   resources :requests, only: [:create]

@@ -1,4 +1,4 @@
-<li class="comment">
+<li class="comment-<%=comment.id%>">
   <div class="avatar icon-overlay icn-link">
     <a href="/users/<%= comment.user.id%>"><%= image_tag(User.find(comment.user.id).avatar.url(:thumb)) %></a>
   </div><!-- /.avatar -->
@@ -15,6 +15,9 @@
     <div id='all-comment' class="message">
       <p><%= comment.comment %></p>
       <ul class="meta">
+        <% if comment.user.id == current_user.id %>
+          <%= link_to("Delete", destroy_comment_path(comment.id), remote: true) %> 
+        <% end %>
       </ul><!-- /.meta -->
     </div><!-- /.message -->
 
