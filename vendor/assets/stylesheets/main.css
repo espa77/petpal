@@ -80,7 +80,8 @@ p {
   margin-bottom: 20px;
 }
 p a {
-  border-bottom: 1px solid #73879C;
+  border-bottom: 0px;
+  color: #707E8C;
 }
 p a:hover {
   border-color: transparent;

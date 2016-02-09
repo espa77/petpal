@@ -1,35 +1,38 @@
-<br>
-    <p>
-      <strong>Address:</strong>
-      <%= @location.address %>
-    </p>
-
-    <p>
-      <strong>Latitude:</strong>
-      <%= @location.latitude %>
-    </p>
-
-    <p>
-      <strong>Longitude:</strong>
-      <%= @location.longitude %>
-    </p>
-
-    <%= link_to "Edit", edit_location_path(@location), class: 'btn btn-small' %>
-    <%= link_to 'Destroy', @location, class: 'btn btn-small', method: :delete, data: { confirm: 'Are you sure?' } %>
-
-
+<div class="container">
   <br>
+      <p>
+        <strong>Address:</strong>
+        <%= @location.address %>
+      </p>
 
-<%= render 'map' %>
+      <p>
+        <strong>Latitude:</strong>
+        <%= @location.latitude %>
+      </p>
 
-<h3>Nearby locations</h3>
-<ul>
-  <% for location in @location.nearbys(30) %>
-    <li><%= link_to location.address, location %> (<%= location.distance.round(2) %> miles)</li>
-  <% end %>
-  </ul>
+      <p>
+        <strong>Longitude:</strong>
+        <%= @location.longitude %>
+      </p>
 
-<p>
-    <%= link_to "Back", :back, class: 'btn btn-small' %>
-    <%= link_to "Find Pals", location_search_path, class: 'btn btn-small' %>
-</p>
+      <%= link_to "Edit", edit_location_path(@location), class: 'btn btn-small' %>
+      <%= link_to 'Destroy', @location, class: 'btn btn-small', method: :delete, data: { confirm: 'Are you sure?' } %>
+
+
+    <br>
+
+  <%= render 'map' %>
+
+  <h3>Nearby locations</h3>
+  <ul>
+    <% for location in @location.nearbys(10) %>
+      <li><%= link_to location.address, location %> (<%= location.distance.round(2) %> miles)</li>
+    <% end %>
+    </ul>
+
+  <p>
+      <%= link_to "Back", :back, class: 'btn btn-small' %>
+      <%= link_to "Find Pals", location_search_path, class: 'btn btn-small' %>
+  </p>
+
+</div>
