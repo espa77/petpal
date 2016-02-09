@@ -1,12 +1,12 @@
 $(".comment-<%= @comment_id %>").remove();
 if (<%= @commentable.comments.length %> > 1) {
-  $('#comments h2').first().text("<%= @commentable.comments.length %> Comments");
+  $('#comments h4').first().text("<%= @commentable.comments.length %> Comments");
   $('.comments a').text("<%= @commentable.comments.length %> Comments");
   }
 else if (<%= @commentable.comments.length %> === 1) {
-  $('#comments h2').first().text("<%= @commentable.comments.length %> Comment");
+  $('#comments h4').first().text("<%= @commentable.comments.length %> Comment");
   $('.comments a').text("<%= @commentable.comments.length %> Comment");
  } else {
-   $('#comments h2').first().text("No comments yet, but you can be first!");
+   $('#comments h4').first().text("Bark Away!");
    $('.comments a').text("No Comments");
  };
