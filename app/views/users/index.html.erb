@@ -8,6 +8,7 @@
 
               <div class="row thumbs gap-md text-center">
                 <% @users.each do |user|  %>
+                <% if user.id != current_user.id %>
                 <div class="col-sm-2 thumb">
                   <figure id='user-<%=user.id %>' class="member">
                     
@@ -35,5 +36,7 @@
                   </figure>
                 </div><!-- /.col -->
                  <% end %>
+                 <% end %>
               </row>
             </section>
+
