@@ -1,9 +1,6 @@
- 
-
-
 
         <section id="team" class="light-bg inner-xs inner-left-xs inner-right-xs">
-                
+
               <h3 class="team-headline sidelines text-center"><span>Make New Friends</span></h3>
 
               <div class="row thumbs gap-md text-center">
@@ -11,16 +8,14 @@
                 <% if user.id != current_user.id %>
                 <div class="col-sm-2 thumb">
                   <figure id='user-<%=user.id %>' class="member">
-                    
+
                     <div class="member-image">
-                      
-        
-                      
-                      <%= image_tag (user.avatar.url(:medium)) %>
-                      
+
+
                     </div><!-- /.member-image -->
-                    
+
                     <figcaption class="member-details bordered no-top-border">
+                      <%= image_tag (user.avatar.url(:medium)) %>
                       <h3>
                         <%= user.name %>
                       </h3>

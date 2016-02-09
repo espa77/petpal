@@ -1,9 +1,8 @@
-$(".commentlist").prepend("<%=j render(@comment) %>");
 if (<%= @commentable.comments.length %> > 1) {
   $('#comments h2').text("<%= @commentable.comments.length %> Comments");
   }
 else if (<%= @commentable.comments.length %> === 1) {
   $('#comments h2').text("<%= @commentable.comments.length %> Comment");
-} else {
-  $('#comments h2').text("No comments yet, but you can be first!");
-};
+ } else {
+   $('#comments h2').text("No comments yet, but you can be first!");
+ };

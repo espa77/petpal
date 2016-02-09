@@ -20,8 +20,8 @@
  *= require_self
  */
 
-body {
-}
+
+
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import "*";
@@ -30,7 +30,11 @@ body {
   position: relative;
   top: 30px;
  }
-
+ .image-render {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
 .round-image-50 {
  border-radius:50px;
     border:1px solid #ccc;
@@ -62,4 +66,3 @@ body {
  .remove-whitespace {
   margin-top: 5px;
  }
- 
