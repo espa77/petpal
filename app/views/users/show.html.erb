@@ -22,6 +22,12 @@
   </div>
   </section>
 <br><br>
+
+<div class="row">
+  <div class="col-md-2 col-md-offset-10">
+    <%= link_to('Edit Profile', edit_user_registration_path, class: "col-sm-offset-1 btn btn-small" )%>
+  </div>
+</div>
         <section id="who-we-are">
         <div class = "remove-whitespace">
           <div class="container inner-bottom-sm">
@@ -64,6 +70,7 @@
             </div><!-- /.row -->
           </div>
         </section>
+
     <section id="team" class="light-bg inner-xs inner-left-xs inner-right-xs">
                 <h3 class="team-headline sidelines text-center"><span><strong>My Friends</strong></span></h3>
                 <div class="row thumbs gap-md text-center">
@@ -150,7 +157,6 @@
     <% end %>
    <% end %>
  <% end %>
-      <%= link_to('Edit Profile', edit_user_registration_path, class: "col-sm-offset-1 btn btn-small" )%>
   <% end %>
   <script type="text/javascript">
      handler = Gmaps.build('Google');
