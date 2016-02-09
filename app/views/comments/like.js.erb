@@ -1,0 +1,6 @@
+<% if @comment.get_likes.length == 1 %>
+  $('.like-<%=@comment.id%>').text('<%=@comment.get_likes.length%> Like');
+<% else %>
+  $('.like-<%=@comment.id%>').text('<%=@comment.get_likes.length%> Likes');
+<% end %>
+  $('.like-<%=@comment.id%>').attr("href", "/posts/<%=@comment.commentable_id%>/comments/<%=@comment.id%>/unlike");

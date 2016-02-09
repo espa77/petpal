@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_commentable, only: [:create, :like, :unlike]
+  before_action :find_commentable, only: [:create]
   respond_to :js
 
   def create
@@ -16,11 +16,11 @@ class CommentsController < ApplicationController
   end
 
   def like
-    @comment = @commentable.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
     if @comment.liked_by current_user
       respond_to do |format|
+        format.js {render 'comments/like.js.erb'}
         format.html { redirect_to :back }
-        format.js
       end
     end
   end
@@ -32,11 +32,11 @@ class CommentsController < ApplicationController
   # end
 
   def unlike
-    @comment = @commentable.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
     if @comment.downvote_by current_user
       respond_to do |format|
+        format.js {render 'comments/unlike.js.erb'}
         format.html { redirect_to :back }
-        format.js
       end
     end
   end

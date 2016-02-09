@@ -38,20 +38,20 @@
                         </h2>
                         <ul class="meta">
                             <% if @post.comments.length > 1 %>
-                              <li class="comments"><a href="/posts/<%=@post.id%>"><%= @post.comments.length %> Comments</a></li>
+                              <li class="comments gray-text"><a href="/posts/<%=@post.id%>"><%= @post.comments.length %> Comments</a></li>
                             <% elsif @post.comments.length == 1 %>
-                              <li class="comments"><a href="/posts/<%=@post.id%>"><%= @post.comments.length %> Comment</a></li>
+                              <li class="comments gray-text"><a href="/posts/<%=@post.id%>"><%= @post.comments.length %> Comment</a></li>
                             <% else %>
-                              <li class="comments"><a href="/posts/<%=@post.id%>">No Comments</a></li>
+                              <li class="comments gray-text"><a href="/posts/<%=@post.id%>">No Comments</a></li>
                             <% end %>
 														<% if (@post.get_likes.select {|vote| vote.voter_id==current_user.id}) !=[] %>
-				                      <li class="likes">
+				                      <li class="likes light-bg">
 
-				                        <%= link_to("#{@post.get_likes.length}", unlike_post_path(@post), remote: true) %>
+				                        <%= link_to("#{@post.get_likes.length}", unlike_post_path(@post), remote: true, class: "gray-text") %>
 				                      </li>
 				                    <% elsif (@post.get_likes.select {|vote| vote.voter_id==current_user.id})==[] %>
 				                      <li class="likes">
-				                          <%= link_to("#{@post.get_likes.length}", like_post_path(@post), remote: true) %>
+				                          <%= link_to("#{@post.get_likes.length}", like_post_path(@post), remote: true, class: "gray-text") %>
 				                      </li>
 				                    <% end %>
                         </ul><!-- /.meta -->

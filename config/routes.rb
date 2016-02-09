@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   post 'requests/:id/destroy', to: 'requests#destroy'
   #creating this route was necessary for getting the correct commentable id
   #along with the id of the comment. There is likely a better way.
-  get 'posts/:post_id/comment/:id/like', to: 'comments#like', :as => :like_comment
-  get 'posts/:post_id/comment/:id/unlike', to: 'comments#unlike', :as => :unlike_comment
+  get 'posts/:post_id/comments/:id/like', to: 'comments#like', :as => :like_comment
+  get 'posts/:post_id/comments/:id/unlike', to: 'comments#unlike', :as => :unlike_comment
 
   get 'locations/search', to: 'locations#search', :as => :location_search
 
