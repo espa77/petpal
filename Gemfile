@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'pry'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 ruby '2.3.0'
@@ -35,7 +35,7 @@ gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'figaro'
 
-gem 'dotenv-rails', :groups => [:development, :test]
+gem 'dotenv-rails'
 
 # Use twitter bootstrap sass
 gem 'bootstrap-sass', '~> 3.3.6'

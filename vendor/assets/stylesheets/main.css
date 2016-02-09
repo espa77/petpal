@@ -1371,7 +1371,7 @@ aside .thumb figure {
   border-bottom: 1px solid #E6E9ED;
 }
 .navbar-collapse.collapse.stuck {
-  position: fixed;
+  position: relative;
   top: 0;
   padding-top: 0;
   padding-bottom: 0;
@@ -4311,6 +4311,7 @@ input:focus:-ms-input-placeholder {
 #comments .commentbody {
   padding-left: 3px;
     overflow: hidden;
+    border-bottom: 1px solid #CED7E0;
 }
 #comments .author {
     margin-bottom: 15px;
