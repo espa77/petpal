@@ -10,10 +10,12 @@ Rails.application.routes.draw do
   post 'requests/:id/destroy', to: 'requests#destroy'
   #creating this route was necessary for getting the correct commentable id
   #along with the id of the comment. There is likely a better way.
-  get 'posts/:post_id/comment/:id/like', to: 'comments#like', :as => :like_comment
-  get 'posts/:post_id/comment/:id/unlike', to: 'comments#unlike', :as => :unlike_comment
+  get 'posts/:post_id/comments/:id/like', to: 'comments#like', :as => :like_comment
+  get 'posts/:post_id/comments/:id/unlike', to: 'comments#unlike', :as => :unlike_comment
 
   get 'locations/search', to: 'locations#search', :as => :location_search
+
+  get 'comments/:id/destroy', to: 'comments#destroy', :as => :destroy_comment
 
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session_path
@@ -41,7 +43,7 @@ Rails.application.routes.draw do
 
   resources :locations
   resources :uploads
-  resources :comments, only: [:create, :destroy]
+  resources :comments, only: [:create]
   resources :favorites
   resources :friendships, except: [:destroy]
   resources :requests, only: [:create]
