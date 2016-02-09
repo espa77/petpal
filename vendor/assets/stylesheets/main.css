@@ -3795,7 +3795,6 @@ input:focus:-ms-input-placeholder {
   content: "\e718";
 }
 .meta li.comments a:after {
-  content: "Comments";
   margin-left: 4px;
 }
 .meta li.likes a:before {
