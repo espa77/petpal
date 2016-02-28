@@ -2,10 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#form {
-  padding-top: 40px;
+.card {
+  max-width: 100%;
+  min-width: 80%;
+  /* height: 200px; */
+  padding: 20px;
+  background: white;
+  float: left;
+  margin: 10px;
 }
 
-.height-lg {
-    height: 375px;
+.img-contain {
+  border: white;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
 }

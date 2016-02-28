@@ -9,11 +9,14 @@
                 <div class="col-sm-2 thumb">
                   <figure id='user-<%=user.id %>' class="member">
 
-                    <figcaption class="member-details bordered no-top-border">
-                      <%= image_tag (user.avatar.url(:medium)) %>
-                      <h3>
-                        <%= user.name %>
-                      </h3>
+                    <div class="card">
+                      <div class="img-contain">
+                        <%= image_tag (user.avatar.url(:medium)) %>
+                      </div>
+                        <figcaption class="member-details bordered no-top-border">
+                      <h3><%= user.name %></h3>
+                    </div>
+
                     </figcaption>
                     <% if current_user.my_friends.include?(user) %>
                      <%= link_to 'Unfriend', unfriend_path(:id => current_user.id, :friendship_id => current_user.find_friendship(current_user, user).id), remote: true, id:"friend-#{user.id}", class: "btn btn-medium" %>
@@ -29,3 +32,4 @@
                  <% end %>
               </row>
             </section>
+            <%= javascript_include_tag "jquery-imagesizer.js" %>

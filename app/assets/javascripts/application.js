@@ -29,6 +29,7 @@
 //=	require jquery.easytabs.min.js
 //=	require viewport-units-buggyfill.js
 //=	require scripts.js
+//= require jquery-imagesizer.js
 
 //= require underscore
 //= require gmaps/google

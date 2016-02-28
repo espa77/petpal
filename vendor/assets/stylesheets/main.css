@@ -1084,7 +1084,7 @@ footer p {
   color: #73879C;
 }
 .no-top-border {
-    border-top: none;
+    border: none;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
