@@ -4,6 +4,6 @@ $('.card img').each(function() {
       height = $current.height(),
       max_h = $('.img-contain').height();
   if (height > max_h) {
-    $current.css({ 'height':'100%','width': 'auto'});
+    $current.css({ 'height':'126px','width': 'auto'});
   }
 });
